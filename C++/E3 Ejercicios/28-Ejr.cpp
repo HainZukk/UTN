@@ -21,7 +21,7 @@ int main() {
         cin >> dia;
         cout << "Tipo (D - Depósito / E - Extracción): ";
         cin >> tipo;
-        cin.ignore(10000, '\n'); // Limpiar el buffer de entrada
+        cin.ignore(10000, '\n'); 
         cout << "Importe: ";
         cin >> importe;
 
@@ -30,7 +30,7 @@ int main() {
             saldo += importe;
             depositos++;
 
-            // Mayor depósito
+            
             if (importe > mayorDeposito) {
                 mayorDeposito = importe;
                 diaMayorDeposito = dia;
@@ -51,7 +51,7 @@ int main() {
     }
     double porcentajeExtraccion = (extracciones * 100.0) / TOTAL_MOVIMIENTOS;
     double porcentajeDeposito = (depositos * 100.0) / TOTAL_MOVIMIENTOS;
-    
+
     cout << "\n=== Resultados ===\n";
     cout << "Saldo final: $" << saldo << endl;
     cout << "Porcentaje de extracciones: " << porcentajeExtraccion << "%" << endl;
