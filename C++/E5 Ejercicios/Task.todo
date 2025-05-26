@@ -1,0 +1,32 @@
+Ejercicios U5:
+    ☐ Completar todos los ejercicios de la U5 @critical 
+    ☐ Compilar cada uno de los codigos @critical 
+    ☐ Subir los ejercicios a GitHub con un Pull Request @low 
+
+Ejercicios Totales :    
+    ✔ Ejercicio 01 @done (24/5/2025, 9:37:15 p.m.)
+    ✔ Ejercicio 02 @done (24/5/2025, 9:37:16 p.m.)
+    ✔ Ejercicio 03 @done (24/5/2025, 9:37:16 p.m.)
+    ✔ Ejercicio 04 @done (24/5/2025, 9:37:19 p.m.)
+    ✔ Ejercicio 05 @done (24/5/2025, 9:37:18 p.m.)
+    ✔ Ejercicio 06 @done (26/5/2025, 5:23:19 p.m.)
+    ✔ Ejercicio 07 @done (26/5/2025, 5:49:38 p.m.)
+    ✔ Ejercicio 08 @done (26/5/2025, 6:01:17 p.m.)
+    ✔ Ejercicio 09 @done (26/5/2025, 8:14:02 p.m.)
+    ☐ Ejercicio 10
+    ☐ Ejercicio 11
+    ☐ Ejercicio 12 
+    ☐ Ejercicio 13
+    ☐ Ejercicio 14
+
+
+
+
+Problemas / Dudas : 
+    ✔ Como redondear ?? @done (24/5/2025, 9:35:09 p.m.) @low
+
+Funcionamiento : 
+    05-Ejr : 
+        ✔ La función toma el número decimal y separa la parte entera y la decimal. Si la parte decimal es 0.5 o más, suma 1 a la parte entera para redondear hacia arriba. Si es menos de 0.5, devuelve solo la parte entera. Luego imprime el número redondeado. @done (24/5/2025, 9:34:52 p.m.)
+
+    
