@@ -3,6 +3,13 @@ Hacer una función llamada CalcularMaximo que determine el máximo entre dos nú
 Hacer un programa para ingresar dos números y, utilizando CalcularMaximo, emita luego el número mayor de ambos.
 */
 
+
+/*
+Cuando pasás una variable por referencia, no se pasa una copia del valor, sino una referencia a la variable original. Esto significa que:
+
+Lo que modifiques dentro de la función afecta a la variable original.
+No se hace copia en memoria → es más eficiente para tipos grandes (por ejemplo, objetos o estructuras).
+*/
 #include <iostream>
 using namespace std;    
 
