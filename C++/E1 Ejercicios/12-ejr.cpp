@@ -13,17 +13,17 @@ using namespace std;
 int main (){
 
     int cantidadHuevos, cajas, sueltos, totalPagar;
-    int precioCaja = 1000;    
-    int precioSuelto = 120;   
-    int huevosPorCaja = 12;
+    const int PRECIOCAJA = 1000;    
+    const int PRECIOSUELTO = 120;   
+    const int HUEVOSPORCAJA = 12;
 
     cout << "Ingrese la cantidad de huevos a comprar: ";
     cin >> cantidadHuevos;
 
-    cajas = cantidadHuevos / huevosPorCaja;
-    sueltos = cantidadHuevos % precioSuelto;
+    cajas = cantidadHuevos / HUEVOSPORCAJA;
+    sueltos = cantidadHuevos % PRECIOSUELTO;
 
-    totalPagar = (cajas * precioCaja) + (sueltos * precioSuelto);
+    totalPagar = (cajas * PRECIOCAJA) + (sueltos * PRECIOSUELTO);
 
 
     cout << "Cantidad de cajas: " << cajas << "\n";
