@@ -21,7 +21,7 @@ int main (){
     cin >> cantidadHuevos;
 
     cajas = cantidadHuevos / HUEVOSPORCAJA;
-    sueltos = cantidadHuevos % PRECIOSUELTO;
+    sueltos = cantidadHuevos % HUEVOSPORCAJA;
 
     totalPagar = (cajas * PRECIOCAJA) + (sueltos * PRECIOSUELTO);
 
