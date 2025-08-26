@@ -11,7 +11,8 @@ Hacer un programa para ingresar por teclado las cuatro notas de los exámenes ob
 using namespace std;
 int main (){
 
-    float n1,n2,n3,n4;
+    int n1,n2,n3,n4;
+    int notas[4];
     int aprobados = 0;
 
     cout << "Ingrese la primera nota: ";
@@ -26,12 +27,17 @@ int main (){
     cout << "Ingrese la cuarta nota: ";
     cin >> n4;
 
+    notas[0] = n1;
+    notas[1] = n2;
+    notas[2] = n3;
+    notas[3] = n4;
 
-    if (n1 >= 4) aprobados ++;
-    if (n2 >= 4) aprobados ++;
-    if (n3 >= 4) aprobados ++;
-    if (n4 >= 4) aprobados ++;
-
+    for (int i = 0; i < 4; i++){
+        if (notas[i] >= 4){
+            aprobados ++;
+        }
+    }
+    
     if (n1 >= 7 && n2 >= 7 && n3 >= 7 && n4 >= 7){
         cout << "Promociona la materia" << endl;
     }
