@@ -7,7 +7,7 @@ using namespace std;
 int main (){
 
 
-    int n1 , n2;
+    int n1,n2;
 
     cout << "Ingrese el primer numero: ";
     cin >> n1;
