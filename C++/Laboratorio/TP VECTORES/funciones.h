@@ -9,4 +9,12 @@ void evaluarDescalificados(int TiempoEmpleado[], int AlimentosRecolectados[], bo
 
 float CalcularPromedioAlimentos(int AlimentosRecolectados [] , int cantidad );
 
+int MasRapidoTiempoConstruccion(int TiempoEmpleado[],int cantidad);
+
+int NoCompletaronRefugio(int TiempoEmpleado[],int cantidad);
+
+void Estado_de_Participante(bool Descalificados[],int AlimentosRecolectados[],int TiempoEmpleado[], int cantidad);
+
+
+
 #endif
