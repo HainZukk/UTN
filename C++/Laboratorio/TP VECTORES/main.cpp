@@ -1,24 +1,28 @@
 #include <iostream>
-#include "funciones.cpp"
+#include <cstdlib>
+#include <ctime>
+#include "funciones.h"
 using namespace std;
 
 int main() {
+    srand(time(0));
+    /*
+    Comando para compilar clang++ -std=c++14 main.cpp funciones.cpp -o main
+    */
+
     int AlimentosRecolectados[12];
     int TiempoEmpleado[12];
     float promedio;
     bool Descalificados[12] = {false};
 
-    // Ingreso de alimentos recolectados en Kg
+    // Generacion de Alimentos Aleatorios
     ingresarAlimentos(AlimentosRecolectados,12);
 
-    // Ingreso de tiempo empleado
+    // Generacion de el tiempo empleado aleatorio
     ingresarTiempoEmpleado(TiempoEmpleado,12);
 
     // Evaluación de descalificación
     evaluarDescalificados(TiempoEmpleado, AlimentosRecolectados, Descalificados, 12);
-
-    // Promedio de almentos
-    promedio = CalcularPromedioAlimentos(AlimentosRecolectados,12);
 
     // Mas rapido en la Construccion
     int ParticipanteMasRapido = MasRapidoTiempoConstruccion(TiempoEmpleado, 12);
@@ -27,23 +31,18 @@ int main() {
 
     cout << "\n========== RESULTADOS ==========\n";
 
-    // Estado de cada participante
     Estado_de_Participante(Descalificados,AlimentosRecolectados,TiempoEmpleado,12);
-
-    // Promedio
+    
+    promedio = CalcularPromedioAlimentos(AlimentosRecolectados,12);
     cout << "\nPromedio de alimentos recolectados: " << promedio << " Kg\n";
 
-    // Participantes por debajo del promedio Punto 3 
+    
     cout << "Participantes por debajo del promedio:\n";
-    for (int i = 0; i < 12; i++) {
-        if (AlimentosRecolectados[i] < promedio) {
-            cout << " - Participante " << i + 1 << " con " << AlimentosRecolectados[i] << " Kg\n";
-        }
-    }
+    Debajo_Promedio(AlimentosRecolectados,12,promedio);
 
-    // Más rápido
+    
     cout << "\nEl participante mas rapido fue el " << ParticipanteMasRapido + 1 << " con " << minTiempo << " dias.\n";
-    // Contar los participantes que no llegaron a completar su refugio Punto 5
+    
     cout << "La cantidad de participantes que no llegaron a completar su refugio es: " << NoCompletaronRefugio(TiempoEmpleado,12) << endl;
     
 
