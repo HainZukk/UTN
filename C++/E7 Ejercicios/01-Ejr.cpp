@@ -20,9 +20,7 @@ void SumaValores(int Nums[10]){
 
 int main(){
 
-    int suma;
     int Nums[10];
-
     SumaValores(Nums);
 
     return 0;
