@@ -1,29 +1,37 @@
+// Leer 10 números y guardarlos en un vector. Calcular el promedio y luego mostrar por pantalla los valores que son mayores al promedio.
+
 #include <iostream>
 using namespace std;
-int main(){
 
-    int N = 10;
-    int numeros[N];
+
+void LecturaNums(){
+
     int suma = 0;
-    float promedio;
+    int mayores_al_promedio[5];
 
+    const int TAMANIO = 5;
+    int vec[TAMANIO] = {1,3,70,60,1};
 
-    for (int i = 0; i < N; i++){
-        cout << "Ingrese el numero " << i + 1 << ": ";
-        cin >> numeros[i];
-        suma += numeros[i];
+    for (int i = 0; i < TAMANIO; i++){
+        suma += vec[i];
     }
 
-    promedio = suma / (float)N;
-    cout << "\nEl promedio es: " << promedio << endl;
-    
-    
-    cout << "Numeros mayores al promedio:\n";
-    for (int i = 0; i < N; i++){
-        if (numeros[i] > promedio){
-            cout << numeros[i] << " ";
+    float promedio = float(suma) / TAMANIO;
+
+    for (int i = 0; i < TAMANIO; i++){
+        if (vec[i] > promedio){
+            cout << vec[i] << endl;
         }
     }
     cout << endl;
+
+}
+
+int main (){
+
+
+    LecturaNums();
+
     return 0;
 }
+
