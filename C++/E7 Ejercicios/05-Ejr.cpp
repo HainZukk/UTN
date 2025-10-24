@@ -1,45 +1,34 @@
-//Leer 10 números y guardarlos en un vector. Determinar e informar cuál es el menor de los impares y el mayor de los pares. Suponer que habrá al menos un número par y uno impar.
+/*
+Leer 10 números y guardarlos en un vector. Determinar e informar cuál es el menor de los impares y el mayor de los pares. Suponer que habrá al menos un número par y uno impar.
+*/
 
 #include <iostream>
 using namespace std;
-int main (){
 
-    const int N = 10;
-    int Numeros[10];
-    int MenorImpar;
-    int MayorPar;
-    bool PrimerImpar = true;
-    bool PrimerPar = true;
+void Pares(int numeros[] , int TAM){
 
-    cout << "Ingrese 10 numeros: " << endl;
-    for (int i = 0; i < N; i++){
-        cout << "Número " << i + 1 << ": ";
-        cin >> Numeros[i]; 
+    int mayorPar = 0;
+    int menorImpar = 0;
 
-        if (Numeros[i] % 2 == 0){
-            if (PrimerPar){
-                MayorPar = Numeros[i];
-                PrimerPar = false;
-            }
-            else if (Numeros[i] > MayorPar){
-                MayorPar = Numeros[i];
-            }
+    for (int i = 0; i < TAM; i++){
+        if (numeros[i] % 2 == 0 && numeros[i] > mayorPar){
+            mayorPar = numeros[i];
         }
-        else{
-            if (PrimerImpar){
-                MenorImpar = Numeros[i];
-                PrimerImpar = false;
-            }
-            else if (Numeros[i] < MenorImpar){
-                MenorImpar = Numeros[i];
-            }
-        }
-        
+        else if (numeros[i] % 2 != 0 && numeros[i] < menorImpar){
+            menorImpar = numeros[i];
+        }   
     }
+    
+    cout << "El mayor de los pares es: " << mayorPar << endl;
+    cout << "El menor de los impares es: " << menorImpar << endl;
+}
 
-        cout << "El menor número impar es: " << MenorImpar << endl;
-        cout << "El mayor número par es: " << MayorPar << endl;
+int main(){
 
+    const int TAM = 5;
+    int numeros[TAM] = {-1,2,4,6,8};
+
+    Pares(numeros , TAM);
 
     return 0;
 }
