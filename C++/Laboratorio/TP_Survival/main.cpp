@@ -11,8 +11,8 @@ float recolectarMateriales(float porcentajeRefugio);
 void mostrarResultados(float kgAlimentos, float porcentajeRefugio, const int DIAS);
 
 int main() {
-    srand(time(NULL)); 
 
+    srand(time(NULL)); 
     menuPrincipal();
 
     return 0;
