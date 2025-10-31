@@ -51,11 +51,11 @@ En Mac/Linux (sin Makefile)
     ./TP_Survival
 
 Usando el Makefile
-    - Compilar el proyecto:
-        make
-    - Compilar y ejecutar el juego:
-        make run
-    - Limpiar el proyecto (eliminar el ejecutable):
+1. Compilar el proyecto:
+    make
+2. Compilar y ejecutar el juego:
+    make run
+3. Limpiar el proyecto (eliminar el ejecutable):
         make clean  
 
 ## 📋 Avances de TP_Survival
