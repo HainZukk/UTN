@@ -83,6 +83,50 @@ void jugar() {
     // mostrarResumen(kgAlimentos, porcentajeRefugio, porcentajeBalsa, ExcedenteAlimento, clasificado, PARTICIPANTES);
 }
 
+// Etapa 1 - Procesamientos de resultados =======================================================================================
+
+float promedioAlimentos(float kgAlimentos[], int participantes){
+    float suma = 0;
+    for (int i = 0; i < participantes; i++){
+        suma += kgAlimentos[i];
+    }
+    return suma / participantes;
+}
+void mostrarSuperaronPromedio(float KgAlimentos[] , int participantes){
+    float promedio = promedioAlimentos(KgAlimentos,participantes);
+    cout << "\nPromedio de alimentos recolectados: " << promedio << " kg\n";
+    cout << "Participantes que superaron el promedio:\n";
+    for (int i = 0; i < participantes; i++){
+        if (KgAlimentos[i] > promedio){
+            cout << "Participante " << i + 1 << ": " << KgAlimentos[i] << " kg\n";
+        }
+    }
+}
+void MasRapidoConstruccion(int TiempoRefugio[], int participantes){
+    int minTiempo = 9999;
+    int ganador = -1;
+    for (int i = 0; i < participantes; i++){
+        if (TiempoRefugio[i] < minTiempo){
+            minTiempo = TiempoRefugio[i];
+            ganador = i;
+        }
+    }
+    cout << "\nParticipante más rápido en construir el refugio: " << ganador + 1 << " en " << minTiempo << " días.\n";
+}
+
+void Mas5Dias(int TiempoRefugio[] , int participantes){
+    const int DIAS = 5;
+    int contador = 0;
+    for (int i = 0; i < participantes; i++){
+        if (TiempoRefugio[i] > DIAS){
+            contador ++;
+        }
+    }
+    cout << "Participantes que tardaron mas de 5 dias: " << contador << endl;
+}
+
+// ============================================================================================================================
+
 // Generar datos random - Sab 01 Noviembre
 int generarRandom(int min, int max) {
     return min + rand() % (max - min + 1);
@@ -158,28 +202,6 @@ float recolectarMateriales(float porcentajeRefugio) {
     system("read -n 1 -s -p \"Presiona cualquier tecla para continuar\"");
     return recolectado;
 }
-
-//Nueva funcion de resumen de todas las etapas
-// void mostrarResumen(float kgAlimentos[], float porcentajeRefugio[], float porcentajeBalsa[], float ExcedenteAlimento[], bool clasificado[], int PARTICIPANTES) {
-//     cout << "\n===== RESUMEN DEL CONCURSO =====" << endl;
-//     for (int i = 0; i < PARTICIPANTES; i++) {
-//         cout << "\n--- Participante " << i + 1 << " ---" << endl;
-//         cout << "Etapa 1:" << endl;
-//         cout << "  Alimentos recolectados: " << kgAlimentos[i] << " kg" << endl;
-//         cout << "  Porcentaje de refugio construido: " << porcentajeRefugio[i] << "%" << endl;
-
-//         cout << "Etapa 2:" << endl;
-//         cout << "  Porcentaje de balsa construido: " << porcentajeBalsa[i] << "%" << endl;
-//         cout << "  Excedente de alimentos: " << ExcedenteAlimento[i] << " kg" << endl;
-
-//         cout << "Estado final: ";
-//         if (clasificado[i]) {
-//             cout << "✔ Clasificado para la siguiente etapa" << endl;
-//         } else {
-//             cout << "✖ Descalificado" << endl;
-//         }
-//     }
-// }
 
 // Etapa 2: 
 
