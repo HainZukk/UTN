@@ -1,6 +1,7 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+void mostrarIntro();
 void menuPrincipal();
 void jugar();
 float recolectarAlimentos();
