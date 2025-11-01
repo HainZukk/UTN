@@ -4,6 +4,41 @@
 using namespace std;
 
 
+#include <iostream>
+using namespace std;
+
+void mostrarIntro() {
+    cout << "======================================================" << endl;
+    cout << "       BIENVENIDO AL CONCURSO DE SUPERVIVENCIA       " << endl;
+    cout << "======================================================" << endl;
+
+    cout << "        &&& &&  & &&" << endl;
+    cout << "     && &\\/&\\|& ()|/ @, &&" << endl;
+    cout << "     &\\/(/&/&||/& /_/)_&/_&" << endl;
+    cout << "  &() &\\/&|()|/&\\/ '%\" & ()" << endl;
+    cout << " &_\\_&&_\\ |& |&&/&__%_/_& &&" << endl;
+    cout << "&&   && & &| &| /& & % ()& /&&" << endl;
+    cout << " ()&_---()&\\&\\|&&-&&--%---()~" << endl;
+    cout << "     &&     \\|||" << endl;
+    cout << "             |||      /\\ " << endl;
+    cout << "             |||     /  \\ " << endl;
+    cout << "             |||    /____\\ " << endl;
+    cout << "             |||    |  __| " << endl;
+    cout << "             |||    | |  | " << endl;
+    cout << "             |||    | |__| " << endl;
+    cout << "             |||    |_____| " << endl;
+    cout << "        ~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
+    cout << "\nPrepárate para recolectar alimentos, construir refugios\n";
+    cout << "y sobrevivir 7 días en la selva tropical!\n";
+    cout << "======================================================\n\n";
+
+    cout << "Presiona Enter para continuar...";
+    cin.ignore();
+    cin.get();
+}
+
+
 void menuPrincipal() {
     int opcion = 0;
 
