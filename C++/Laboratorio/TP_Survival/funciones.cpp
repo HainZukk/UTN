@@ -75,6 +75,10 @@ void jugar() {
     int tiempoRefugio[PARTICIPANTES] = {0};
     int eleccion;
 
+    //Etapa 2
+    float alimentosEtapa2[PARTICIPANTES] = {0};
+    int tiempoConstruccion[PARTICIPANTES] = {0};
+
     for (int i = 0; i < PARTICIPANTES; i++) {
         int diasRefugio = 0;
         cout << "\n===== Participante " << i + 1 << " =====" << endl;
@@ -118,14 +122,14 @@ void jugar() {
     }
 
     // Mostrar datos
-    mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES);
+    mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES, clasificado, "Refugio");
 
-    cout << "\nPresiona Enter para continuar a la Etapa 2...";
+    cout << "\nPresiona Enter para continuar a la Etapa 2..." << endl;
     cin.ignore();
     cin.get();
-
+    
     // Etapa 2
-    Construir_Balsa(kgAlimentos, clasificado);
+    Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
 
 }
 
@@ -171,12 +175,21 @@ void Mas5Dias(int TiempoRefugio[] , int participantes){
     cout << "Participantes que tardaron mas de 5 dias: " << contador << endl;
 }
 
-void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes) {
-    
-    mostrarSuperaronPromedio(kgAlimentos, participantes);
-    MasRapidoConstruccion(tiempoRefugio, participantes);
-    Mas5Dias(tiempoRefugio, participantes);
+void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes, bool clasificados[], string tipoConstruccion) {
+    cout << "\n===============================" << endl;
+    cout << " RESULTADOS: " << tipoConstruccion << endl;
+    cout << "===============================" << endl;
+
+    if (tipoConstruccion == "Refugio") {
+        mostrarSuperaronPromedio(kgAlimentos, participantes);
+        MasRapidoConstruccion(tiempoRefugio, participantes);
+        Mas5Dias(tiempoRefugio, participantes);
+    } else if (tipoConstruccion == "Balsa" || tipoConstruccion == "balsa") {
+        mostrarSuperaronPromedioEtapa2(kgAlimentos, clasificados, participantes);
+        mostrarMasRapidoEnConstruir(tiempoRefugio, clasificados, participantes);
+    }
 }
+
 
 
 // ============================================================================================================================
@@ -259,25 +272,23 @@ float recolectarMateriales(float porcentajeRefugio) {
 
 // Etapa 2: 
 
-void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
+void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimentosEtapa2[], int tiempoConstruccion[]) {
     const int PARTICIPANTES = 8;
     const int DIAS = 6;
     const float ALIMENTO_MINIMO = 14.0;
-    float kgAlimentos[PARTICIPANTES] = {0};
+
     float porcentajeBalsa[PARTICIPANTES] = {0};
-    int tiempoBalsa[PARTICIPANTES] = {0};
     int eleccion, material;
 
-    srand(time(NULL)); 
+    srand(time(NULL));
 
     for (int i = 0; i < PARTICIPANTES; i++) {
-        if (!Clasificados[i]) {
-            continue;
-        }
+        if (!Clasificados[i]) continue; // salta los descalificados
 
         cout << "\n===== Etapa 2 - Participante " << i + 1 << " =====" << endl;
 
-        kgAlimentos[i] = ExcedenteAlimento[i];
+        float kgAlimentos = ExcedenteAlimento[i];
+        int tiempoBalsa = 0;
 
         for (int dia = 1; dia <= DIAS; dia++) {
             cout << "\nDía " << dia << " de 6" << endl;
@@ -292,9 +303,9 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
             }
 
             if (eleccion == 1) {
-                float recolectado = 2 + rand() % 6;
-                kgAlimentos[i] += recolectado;
-                cout << "Recolectó " << recolectado << " kg de alimentos. Total: " << kgAlimentos[i] << " kg" << endl;
+                float recolectado = generarRandom(2, 6);
+                kgAlimentos += recolectado;
+                cout << "Recolectó " << recolectado << " kg de alimentos. Total: " << kgAlimentos << " kg" << endl;
             }
             else if (eleccion == 2 && porcentajeBalsa[i] < 100) {
                 cout << "Materiales disponibles:" << endl;
@@ -306,13 +317,13 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
                 float avance = 0;
                 switch (material) {
                     case 1: 
-                        avance = generarRandom(20,16);
+                        avance = generarRandom(20, 35); 
                         break;
                     case 2: 
-                        avance = generarRandom(10,11);
+                        avance = generarRandom(10, 20); 
                         break;
                     case 3: 
-                        avance = generarRandom(10,11);
+                        avance = generarRandom(15, 25); 
                         break;
                     default:
                         cout << "Opción inválida. Se pierde el día." << endl;
@@ -321,8 +332,8 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
 
                 porcentajeBalsa[i] += avance;
                 if (porcentajeBalsa[i] > 100) porcentajeBalsa[i] = 100;
+                tiempoBalsa++;
 
-                tiempoBalsa[i]++;
                 cout << "Avance en la construcción: " << porcentajeBalsa[i] << "%" << endl;
             }
             else {
@@ -330,17 +341,74 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
             }
         }
 
+        // Guardar los resultados de cada participante
+        alimentosEtapa2[i] = kgAlimentos;
+        tiempoConstruccion[i] = tiempoBalsa;
+
         cout << "\n--- Resultado del participante " << i + 1 << " ---" << endl;
-        if (porcentajeBalsa[i] >= 100 && kgAlimentos[i] >= ALIMENTO_MINIMO) {
-            cout << "✔ Clasificado a la siguiente etapa!" << endl;
+        if (porcentajeBalsa[i] >= 100 && kgAlimentos >= ALIMENTO_MINIMO) {
+            cout << "Clasificado a la siguiente etapa!" << endl;
             Clasificados[i] = true;
-            ExcedenteAlimento[i] = kgAlimentos[i] - ALIMENTO_MINIMO;
+            ExcedenteAlimento[i] = kgAlimentos - ALIMENTO_MINIMO;
         } else {
             cout << "Descalificado. No cumplió los requisitos." << endl;
             Clasificados[i] = false;
             ExcedenteAlimento[i] = 0;
         }
     }
+
     
+    cout << "\n=== RESULTADOS GENERALES ETAPA 2 ===" << endl;
+    mostrarResultados(alimentosEtapa2, tiempoConstruccion, PARTICIPANTES, Clasificados, "balsa");
+
+}
+
+// Etapa 2 - Procesamiento de datos ==============================================================
+
+float promedioAlimentosEtapa2(float kgAlimentos[], bool clasificados[], int participantes) {
+    float suma = 0;
+    int contador = 0;
+
+    for (int i = 0; i < participantes; i++) {
+        if (clasificados[i]) {   
+            suma += kgAlimentos[i];
+            contador++;
+        }
+    }
+    if (contador == 0) return 0;
+    return suma / contador;
+}
+
+void mostrarSuperaronPromedioEtapa2(float kgAlimentos[], bool clasificados[], int participantes) {
+    float promedio = promedioAlimentosEtapa2(kgAlimentos, clasificados, participantes);
+    cout << "\nPromedio de alimentos recolectados: " << promedio << " kg\n";
+    cout << "Participantes que superaron el promedio:\n";
+
+    for (int i = 0; i < participantes; i++) {
+        if (clasificados[i] && kgAlimentos[i] > promedio) {
+            cout << "Participante " << i + 1 << ": " << kgAlimentos[i] << " kg\n";
+        }
+    }
+}
+
+
+void mostrarMasRapidoEnConstruir(int tiempoConstruccion[], bool clasificados[], int participantes) {
+    int minTiempo = 9999;
+    int participanteMasRapido = -1;
+
+    for (int i = 0; i < participantes; i++) {
+        if (clasificados[i] && tiempoConstruccion[i] > 0 && tiempoConstruccion[i] < minTiempo) {
+            minTiempo = tiempoConstruccion[i];
+            participanteMasRapido = i;
+        }
+    }
+
+    cout << "\n=== Participante más rápido en construir la balsa ===" << endl;
+
+    if (participanteMasRapido != -1) {
+        cout << "Participante " << participanteMasRapido + 1 << " fue el más rápido, con " << minTiempo << " días." << endl;
+    } else {
+        cout << "Ningún participante completó la balsa." << endl;
+    }
 }
 
