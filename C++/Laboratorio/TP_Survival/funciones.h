@@ -5,6 +5,10 @@ void menuPrincipal();
 void jugar();
 float recolectarAlimentos();
 float recolectarMateriales(float porcentajeRefugio);
-void mostrarResultados(float kgAlimentos, float porcentajeRefugio, const int DIAS);
+
+//Etapa 2
+void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]);
+// void mostrarResumen(float kgAlimentos[], float porcentajeRefugio[], float porcentajeBalsa[], bool clasificado[], int PARTICIPANTES);
+
 
 #endif
