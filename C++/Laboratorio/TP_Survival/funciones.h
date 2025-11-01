@@ -6,10 +6,18 @@ void jugar();
 float recolectarAlimentos();
 float recolectarMateriales(float porcentajeRefugio);
 
+
+//Etapa 1 Procesamiento de datos
+float promedioAlimentos(float KgAlimentos[], int participantes);
+void mostrarSuperaronPromedio(float KgAlimentos[] , int participantes);
+void MasRapidoConstruccion(int TiempoRefugio[], int participantes);
+void Mas5Dias(int TiempoRefugio[] , int participantes);
+
+
 //Etapa 2
 void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]);
 int generarRandom(int min, int max);
-// void mostrarResumen(float kgAlimentos[], float porcentajeRefugio[], float porcentajeBalsa[], bool clasificado[], int PARTICIPANTES);
+
 
 
 #endif
