@@ -31,31 +31,50 @@ void menuPrincipal() {
 }
 
 void jugar() {
+    const int PARTICIPANTES = 8;
     const int DIAS = 7;
-    float kgAlimentos = 0;
-    float porcentajeRefugio = 0;
+
+    float kgAlimentos[PARTICIPANTES] = {0};
+    float porcentajeRefugio[PARTICIPANTES] = {0};
+    bool clasificado[PARTICIPANTES] = {false};
     int eleccion;
 
-    cout << "Ha comenzado un nuevo juego" << endl;
-    cout << "Tiene 7 días para recolectar" << endl;
+    for (int i = 0; i < PARTICIPANTES; i++) {
+        cout << "\n===== Participante " << i + 1 << " =====" << endl;
+        cout << "Tiene 7 días para recolectar alimentos y construir un refugio." << endl;
 
-    for (int i = 1; i <= DIAS; i++) {
-        cout << "\nDía: " << i << endl;
-        cout << "1. Recolectar alimentos" << endl;
-        cout << "2. Recolectar materiales" << endl;
-        cin >> eleccion;
+        for (int j = 0; j < DIAS; j++) {
+            cout << "\nDía " << j + 1 << endl;
+            cout << "1. Recolectar alimentos" << endl;
+            cout << "2. Recolectar materiales para el refugio" << endl;
+            cout << "Elija una opción: ";
+            cin >> eleccion;
 
-        if (eleccion == 1) {
-            kgAlimentos += recolectarAlimentos();
-        } else if (eleccion == 2) {
-            porcentajeRefugio += recolectarMateriales(porcentajeRefugio);
-            if (porcentajeRefugio > 100) porcentajeRefugio = 100;
+            if (eleccion == 1) {
+                kgAlimentos[i] += recolectarAlimentos();
+            } else if (eleccion == 2) {
+                porcentajeRefugio[i] += recolectarMateriales(porcentajeRefugio[i]);
+                if (porcentajeRefugio[i] > 100) porcentajeRefugio[i] = 100;
+            } else {
+                cout << "Opción inválida. Día perdido." << endl;
+            }
+        }
+
+        // Verificamos el porcentaje del refugio
+        if (kgAlimentos[i] >= 14 && porcentajeRefugio[i] == 100) {
+            clasificado[i] = true;
+        }
+
+        cout << "\nResumen del participante " << i + 1 << ":" << endl;
+        cout << "Alimentos recolectados: " << kgAlimentos[i] << " kg" << endl;
+        cout << "Avance del refugio: " << porcentajeRefugio[i] << "%" << endl;
+
+        if (clasificado[i]) {
+            cout << "Estado: Clasificado a la siguiente etapa." << endl;
         } else {
-            cout << "Opción inválida." << endl;
+            cout << "Estado: Descalificado." << endl;
         }
     }
-
-    mostrarResultados(kgAlimentos, porcentajeRefugio, DIAS);
 }
 
 float recolectarAlimentos() {
