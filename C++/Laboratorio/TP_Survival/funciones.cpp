@@ -83,6 +83,11 @@ void jugar() {
     // mostrarResumen(kgAlimentos, porcentajeRefugio, porcentajeBalsa, ExcedenteAlimento, clasificado, PARTICIPANTES);
 }
 
+// Generar datos random - Sab 01 Noviembre
+int generarRandom(int min, int max) {
+    return min + rand() % (max - min + 1);
+}
+
 float recolectarAlimentos() {
     int tipo;
     float recolectado = 0;
@@ -95,13 +100,13 @@ float recolectarAlimentos() {
 
     switch (tipo) {
         case 1:
-            recolectado = 2 + rand() % 10; // 2 a 11 kg
+            recolectado = generarRandom(2,10);
             break;
         case 2:
-            recolectado = 1 + rand() % 8;  // 1 a 8 kg
+            recolectado = generarRandom(1,8);
             break;
         case 3:
-            recolectado = 3 + rand() % 12; // 3 a 14 kg
+            recolectado = generarRandom(3,14);
             break;
         default:
             cout << "Opción inválida." << endl;
@@ -130,10 +135,18 @@ float recolectarMateriales(float porcentajeRefugio) {
     cin >> tipo;
 
     switch (tipo) {
-        case 1: recolectado = 5 + rand() % 15; break;
-        case 2: recolectado = 1 + rand() % 12; break;
-        case 3: recolectado = 1 + rand() % 20; break;
-        case 4: recolectado = 1 + rand() % 30; break;
+        case 1: 
+            recolectado = generarRandom(5,15); 
+            break;
+        case 2: 
+            recolectado = generarRandom(1,12); 
+            break;
+        case 3: 
+            recolectado = generarRandom(1,20);
+            break;
+        case 4: 
+            recolectado = generarRandom(1,30);
+            break;
         default:
             cout << "Opción inválida." << endl;
             recolectado = 0;
@@ -216,9 +229,15 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
 
                 float avance = 0;
                 switch (material) {
-                    case 1: avance = 20 + rand() % 16; break;
-                    case 2: avance = 10 + rand() % 11; break;
-                    case 3: avance = 15 + rand() % 11; break;
+                    case 1: 
+                        avance = generarRandom(20,16);
+                        break;
+                    case 2: 
+                        avance = generarRandom(10,11);
+                        break;
+                    case 3: 
+                        avance = generarRandom(10,11);
+                        break;
                     default:
                         cout << "Opción inválida. Se pierde el día." << endl;
                         continue;
@@ -248,3 +267,4 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
     }
     
 }
+
