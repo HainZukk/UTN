@@ -65,6 +65,7 @@ void jugar() {
             clasificado[i] = true;
         }
 
+        // Resumen para cada participante del evento survival
         cout << "\nResumen del participante " << i + 1 << ":" << endl;
         cout << "Alimentos recolectados: " << kgAlimentos[i] << " kg" << endl;
         cout << "Avance del refugio: " << porcentajeRefugio[i] << "%" << endl;
@@ -75,6 +76,11 @@ void jugar() {
             cout << "Estado: Descalificado." << endl;
         }
     }
+
+    // Etapa 2
+    Construir_Balsa(kgAlimentos, clasificado);
+
+    // mostrarResumen(kgAlimentos, porcentajeRefugio, porcentajeBalsa, ExcedenteAlimento, clasificado, PARTICIPANTES);
 }
 
 float recolectarAlimentos() {
@@ -140,10 +146,105 @@ float recolectarMateriales(float porcentajeRefugio) {
     return recolectado;
 }
 
-void mostrarResultados(float kgAlimentos, float porcentajeRefugio, const int DIAS) {
-    cout << "\n--- RESULTADOS FINALES ---" << endl;
-    cout << "Total de alimentos recolectados: " << kgAlimentos << " kg" << endl;
-    cout << "Promedio diario de alimentos: " << kgAlimentos / DIAS << " kg" << endl;
-    cout << "Porcentaje de refugio construido: " << porcentajeRefugio << "%" << endl;
-    cout << "Promedio diario de materiales: " << porcentajeRefugio / DIAS << "%" << endl;
+//Nueva funcion de resumen de todas las etapas
+// void mostrarResumen(float kgAlimentos[], float porcentajeRefugio[], float porcentajeBalsa[], float ExcedenteAlimento[], bool clasificado[], int PARTICIPANTES) {
+//     cout << "\n===== RESUMEN DEL CONCURSO =====" << endl;
+//     for (int i = 0; i < PARTICIPANTES; i++) {
+//         cout << "\n--- Participante " << i + 1 << " ---" << endl;
+//         cout << "Etapa 1:" << endl;
+//         cout << "  Alimentos recolectados: " << kgAlimentos[i] << " kg" << endl;
+//         cout << "  Porcentaje de refugio construido: " << porcentajeRefugio[i] << "%" << endl;
+
+//         cout << "Etapa 2:" << endl;
+//         cout << "  Porcentaje de balsa construido: " << porcentajeBalsa[i] << "%" << endl;
+//         cout << "  Excedente de alimentos: " << ExcedenteAlimento[i] << " kg" << endl;
+
+//         cout << "Estado final: ";
+//         if (clasificado[i]) {
+//             cout << "✔ Clasificado para la siguiente etapa" << endl;
+//         } else {
+//             cout << "✖ Descalificado" << endl;
+//         }
+//     }
+// }
+
+// Etapa 2: 
+
+void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[]) {
+    const int PARTICIPANTES = 8;
+    const int DIAS = 6;
+    const float ALIMENTO_MINIMO = 14.0;
+    float kgAlimentos[PARTICIPANTES] = {0};
+    float porcentajeBalsa[PARTICIPANTES] = {0};
+    int tiempoBalsa[PARTICIPANTES] = {0};
+    int eleccion, material;
+
+    srand(time(NULL)); 
+
+    for (int i = 0; i < PARTICIPANTES; i++) {
+        if (!Clasificados[i]) {
+            continue;
+        }
+
+        cout << "\n===== Etapa 2 - Participante " << i + 1 << " =====" << endl;
+
+        kgAlimentos[i] = ExcedenteAlimento[i];
+
+        for (int dia = 1; dia <= DIAS; dia++) {
+            cout << "\nDía " << dia << " de 6" << endl;
+
+            if (porcentajeBalsa[i] < 100) {
+                cout << "1. Recolectar alimentos" << endl;
+                cout << "2. Construir balsa" << endl;
+                cin >> eleccion;
+            } else {
+                cout << "Balsa completa. Solo puede recolectar alimentos." << endl;
+                eleccion = 1;
+            }
+
+            if (eleccion == 1) {
+                float recolectado = 2 + rand() % 6;
+                kgAlimentos[i] += recolectado;
+                cout << "Recolectó " << recolectado << " kg de alimentos. Total: " << kgAlimentos[i] << " kg" << endl;
+            }
+            else if (eleccion == 2 && porcentajeBalsa[i] < 100) {
+                cout << "Materiales disponibles:" << endl;
+                cout << "1. Troncos de árboles (20-35%)" << endl;
+                cout << "2. Hojas de palmera (10-20%)" << endl;
+                cout << "3. Caña (15-25%)" << endl;
+                cin >> material;
+
+                float avance = 0;
+                switch (material) {
+                    case 1: avance = 20 + rand() % 16; break;
+                    case 2: avance = 10 + rand() % 11; break;
+                    case 3: avance = 15 + rand() % 11; break;
+                    default:
+                        cout << "Opción inválida. Se pierde el día." << endl;
+                        continue;
+                }
+
+                porcentajeBalsa[i] += avance;
+                if (porcentajeBalsa[i] > 100) porcentajeBalsa[i] = 100;
+
+                tiempoBalsa[i]++;
+                cout << "Avance en la construcción: " << porcentajeBalsa[i] << "%" << endl;
+            }
+            else {
+                cout << "Opción inválida." << endl;
+            }
+        }
+
+        cout << "\n--- Resultado del participante " << i + 1 << " ---" << endl;
+        if (porcentajeBalsa[i] >= 100 && kgAlimentos[i] >= ALIMENTO_MINIMO) {
+            cout << "✔ Clasificado a la siguiente etapa!" << endl;
+            Clasificados[i] = true;
+            ExcedenteAlimento[i] = kgAlimentos[i] - ALIMENTO_MINIMO;
+        } else {
+            cout << "Descalificado. No cumplió los requisitos." << endl;
+            Clasificados[i] = false;
+            ExcedenteAlimento[i] = 0;
+        }
+    }
+    
 }
