@@ -12,6 +12,7 @@ float promedioAlimentos(float KgAlimentos[], int participantes);
 void mostrarSuperaronPromedio(float KgAlimentos[] , int participantes);
 void MasRapidoConstruccion(int TiempoRefugio[], int participantes);
 void Mas5Dias(int TiempoRefugio[] , int participantes);
+void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes);
 
 
 //Etapa 2
