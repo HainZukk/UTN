@@ -37,9 +37,11 @@ void jugar() {
     float kgAlimentos[PARTICIPANTES] = {0};
     float porcentajeRefugio[PARTICIPANTES] = {0};
     bool clasificado[PARTICIPANTES] = {false};
+    int tiempoRefugio[PARTICIPANTES] = {0};
     int eleccion;
 
     for (int i = 0; i < PARTICIPANTES; i++) {
+        int diasRefugio = 0;
         cout << "\n===== Participante " << i + 1 << " =====" << endl;
         cout << "Tiene 7 días para recolectar alimentos y construir un refugio." << endl;
 
@@ -55,10 +57,13 @@ void jugar() {
             } else if (eleccion == 2) {
                 porcentajeRefugio[i] += recolectarMateriales(porcentajeRefugio[i]);
                 if (porcentajeRefugio[i] > 100) porcentajeRefugio[i] = 100;
+                diasRefugio++;
             } else {
                 cout << "Opción inválida. Día perdido." << endl;
             }
         }
+
+        tiempoRefugio[i] = diasRefugio;
 
         // Verificamos el porcentaje del refugio
         if (kgAlimentos[i] >= 14 && porcentajeRefugio[i] == 100) {
@@ -77,10 +82,16 @@ void jugar() {
         }
     }
 
+    // Mostrar datos
+    mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES);
+
+    cout << "\nPresiona Enter para continuar a la Etapa 2...";
+    cin.ignore();
+    cin.get();
+
     // Etapa 2
     Construir_Balsa(kgAlimentos, clasificado);
 
-    // mostrarResumen(kgAlimentos, porcentajeRefugio, porcentajeBalsa, ExcedenteAlimento, clasificado, PARTICIPANTES);
 }
 
 // Etapa 1 - Procesamientos de resultados =======================================================================================
@@ -124,6 +135,14 @@ void Mas5Dias(int TiempoRefugio[] , int participantes){
     }
     cout << "Participantes que tardaron mas de 5 dias: " << contador << endl;
 }
+
+void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes) {
+    
+    mostrarSuperaronPromedio(kgAlimentos, participantes);
+    MasRapidoConstruccion(tiempoRefugio, participantes);
+    Mas5Dias(tiempoRefugio, participantes);
+}
+
 
 // ============================================================================================================================
 
