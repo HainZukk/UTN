@@ -131,6 +131,9 @@ void jugar() {
     // Etapa 2
     Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
 
+
+    // Etapa 3
+    RutaFinal(clasificado,PARTICIPANTES);
 }
 
 // Etapa 1 - Procesamientos de resultados =======================================================================================
@@ -211,13 +214,13 @@ float recolectarAlimentos() {
 
     switch (tipo) {
         case 1:
-            recolectado = generarRandom(2,10);
+            recolectado = generarRandom(3,8);
             break;
         case 2:
-            recolectado = generarRandom(1,8);
+            recolectado = generarRandom(4,8);
             break;
         case 3:
-            recolectado = generarRandom(3,14);
+            recolectado = generarRandom(5,14);
             break;
         default:
             cout << "Opción inválida." << endl;
@@ -247,16 +250,16 @@ float recolectarMateriales(float porcentajeRefugio) {
 
     switch (tipo) {
         case 1: 
-            recolectado = generarRandom(5,15); 
+            recolectado = generarRandom(7,15); 
             break;
         case 2: 
-            recolectado = generarRandom(1,12); 
+            recolectado = generarRandom(9,20); 
             break;
         case 3: 
-            recolectado = generarRandom(1,20);
+            recolectado = generarRandom(10,30);
             break;
         case 4: 
-            recolectado = generarRandom(1,30);
+            recolectado = generarRandom(1,40);
             break;
         default:
             cout << "Opción inválida." << endl;
@@ -266,7 +269,9 @@ float recolectarMateriales(float porcentajeRefugio) {
 
     cout << "Recolectaste " << recolectado << "% de materiales." << endl;
     cout << "Progreso del refugio: " << porcentajeRefugio + recolectado << "%" << endl;
-    system("read -n 1 -s -p \"Presiona cualquier tecla para continuar\"");
+    cout << "Presiona Enter para continuar...";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
     return recolectado;
 }
 
@@ -412,3 +417,68 @@ void mostrarMasRapidoEnConstruir(int tiempoConstruccion[], bool clasificados[], 
     }
 }
 
+
+//etapa 3
+
+float simularVelocidad() {
+    
+    return 1 + rand() % 5;
+}
+
+void RutaFinal(bool clasificados[] , int cantidad){
+
+    const int HORAS = 24;
+    const int KILOMETRAJE = 18; // Esto son kilometros
+
+
+    float Tiempos[cantidad];
+    float Llego[cantidad];
+    float velocidad;
+
+    srand(time(0));
+
+    cout << "================================================================\n";
+    cout << "================== ETAPA 3 - FLUVIAL ===========================\n";
+    cout << "================================================================\n";
+
+    cout << "Esta es la etapa final: cada participante debe navegar desde el refugio hasta el destino.\n";
+    cout << "El tiempo máximo permitido es de 24 horas.\n\n";
+
+    for (int i = 0; i < cantidad; i++){
+        if (!clasificados[i]){
+            Llego[i] = false;
+            Tiempos[i] = 0;
+            continue;
+        }
+        
+        cout << "\nParticipante " << i + 1 << ", elija un camino:\n";
+        cout << "1) Camino del Río Calmo\n";
+        cout << "2) Camino del Medio\n";
+        cout << "3) Camino del Remolino\n";
+        cout << "Seleccione (1-3): ";
+
+        int opcion;
+        cin >> opcion;
+
+        float VelocidadBase = simularVelocidad();
+        float VelocidadFinal;
+
+        switch (opcion){
+        case 1:
+            cout << "Usted a elegido el camino del Rio Calmo" << endl;
+            VelocidadFinal = VelocidadBase * 1.20;
+            break;
+        case 2:
+            cout << "Usted a elegido el camino del Medio" << endl;
+            VelocidadFinal = VelocidadBase * 1.00;
+        case 3:
+            cout << "Usted a elegido el Camino del Remolino" << endl;
+            VelocidadFinal = VelocidadBase * 0.8;
+        default:
+            cout << "Opción inválida. Se asigna Camino del Medio." << endl;
+            VelocidadFinal = VelocidadBase;
+            break;
+        }
+    }
+    
+}
