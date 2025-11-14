@@ -121,22 +121,100 @@ void jugar() {
         }
     }
 
-    // Mostrar datos
-    mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES, clasificado, "Refugio");
+    // Mostrar datos =================================================================================
 
+    // mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES, clasificado, "Refugio");
+
+    // Mostrar tabla ordenada de la Etapa 1
+    mostrarResultadosEtapa1(kgAlimentos, tiempoRefugio, clasificado, PARTICIPANTES);
+
+    if (!hayAlgunClasificado(clasificado,PARTICIPANTES)){
+        cout << "\nNingún participante clasificó a la siguiente etapa. Fin del juego.\n";
+        return;
+    }
+    
     cout << "\nPresiona Enter para continuar a la Etapa 2..." << endl;
     cin.ignore();
     cin.get();
     
     // Etapa 2
     Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
-
+    
+    if (!hayAlgunClasificado(clasificado,PARTICIPANTES)){
+        cout << "\nNingún participante clasificó a la siguiente etapa. Fin del juego.\n";
+        return;
+    }
 
     // Etapa 3
     RutaFinal(clasificado,PARTICIPANTES);
 }
 
 // Etapa 1 - Procesamientos de resultados =======================================================================================
+
+
+// Nueva funcion para verificar clasificados
+bool hayAlgunClasificado(bool clasificados[], int participantes) {
+    for (int i = 0; i < participantes; i++) {
+        if (clasificados[i]) {
+            return true;  
+        }
+    }
+    return false; 
+}
+
+
+// Nueva funcion para mostrar tabla 
+void mostrarResultadosEtapa1(float kgAlimentos[], int tiempoRefugio[], bool clasificados[], int participantes) {
+    cout << "\n==== RESULTADOS ETAPA 1 - REFUGIO ====" << endl;
+    cout << "Puesto  Participante  Tiempo(días)  Alimentos(kg)" << endl;
+
+    bool usados[100] = {0}; 
+    int puesto = 1;
+
+    // Mostrar clasificados ordenados
+    for (int p = 0; p < participantes; p++) {
+        int indiceMin = -1;
+        int minTiempo = 9999;
+        float maxAlimentos = -1;
+
+        for (int i = 0; i < participantes; i++) {
+            if (clasificados[i] && !usados[i]) {
+                if (tiempoRefugio[i] < minTiempo) {
+                    minTiempo = tiempoRefugio[i];
+                    maxAlimentos = kgAlimentos[i];
+                    indiceMin = i;
+                } else if (tiempoRefugio[i] == minTiempo && kgAlimentos[i] > maxAlimentos) {
+                    maxAlimentos = kgAlimentos[i];
+                    indiceMin = i;
+                }
+            }
+        }
+
+        if (indiceMin == -1) break; 
+        usados[indiceMin] = true;
+
+        cout << puesto << "        "
+             << "Participante " << indiceMin + 1 << "      "
+             << tiempoRefugio[indiceMin] << "             "
+             << kgAlimentos[indiceMin] << endl;
+
+        puesto++;
+    }
+
+    // Mostrar descalificados al final
+    cout << "\n--- Descalificados ---" << endl;
+    for (int i = 0; i < participantes; i++) {
+        if (!clasificados[i]) {
+            cout << "Participante " << i + 1
+                 << "   Tiempo: -"
+                 << "   Alimentos: " << kgAlimentos[i] << endl;
+        }
+    }
+
+    cout << "===============================" << endl;
+}
+
+
 
 float promedioAlimentos(float kgAlimentos[], int participantes){
     float suma = 0;
@@ -155,6 +233,7 @@ void mostrarSuperaronPromedio(float KgAlimentos[] , int participantes){
         }
     }
 }
+
 void MasRapidoConstruccion(int TiempoRefugio[], int participantes){
     int minTiempo = 9999;
     int ganador = -1;
@@ -167,31 +246,31 @@ void MasRapidoConstruccion(int TiempoRefugio[], int participantes){
     cout << "\nParticipante más rápido en construir el refugio: " << ganador + 1 << " en " << minTiempo << " días.\n";
 }
 
-void Mas5Dias(int TiempoRefugio[] , int participantes){
-    const int DIAS = 5;
-    int contador = 0;
-    for (int i = 0; i < participantes; i++){
-        if (TiempoRefugio[i] > DIAS){
-            contador ++;
-        }
-    }
-    cout << "Participantes que tardaron mas de 5 dias: " << contador << endl;
-}
+// void Mas5Dias(int TiempoRefugio[] , int participantes){
+//     const int DIAS = 5;
+//     int contador = 0;
+//     for (int i = 0; i < participantes; i++){
+//         if (TiempoRefugio[i] > DIAS){
+//             contador ++;
+//         }
+//     }
+//     cout << "Participantes que tardaron mas de 5 dias: " << contador << endl;
+// }
 
-void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes, bool clasificados[], string tipoConstruccion) {
-    cout << "\n===============================" << endl;
-    cout << " RESULTADOS: " << tipoConstruccion << endl;
-    cout << "===============================" << endl;
+// void mostrarResultados(float kgAlimentos[], int tiempoRefugio[], int participantes, bool clasificados[], string tipoConstruccion) {
+//     cout << "\n===============================" << endl;
+//     cout << " RESULTADOS: " << tipoConstruccion << endl;
+//     cout << "===============================" << endl;
 
-    if (tipoConstruccion == "Refugio") {
-        mostrarSuperaronPromedio(kgAlimentos, participantes);
-        MasRapidoConstruccion(tiempoRefugio, participantes);
-        Mas5Dias(tiempoRefugio, participantes);
-    } else if (tipoConstruccion == "Balsa" || tipoConstruccion == "balsa") {
-        mostrarSuperaronPromedioEtapa2(kgAlimentos, clasificados, participantes);
-        mostrarMasRapidoEnConstruir(tiempoRefugio, clasificados, participantes);
-    }
-}
+//     if (tipoConstruccion == "Refugio") {
+//         mostrarSuperaronPromedio(kgAlimentos, participantes);
+//         MasRapidoConstruccion(tiempoRefugio, participantes);
+//         Mas5Dias(tiempoRefugio, participantes);
+//     } else if (tipoConstruccion == "Balsa" || tipoConstruccion == "balsa") {
+//         mostrarSuperaronPromedioEtapa2(kgAlimentos, clasificados, participantes);
+//         mostrarMasRapidoEnConstruir(tiempoRefugio, clasificados, participantes);
+//     }
+// }
 
 
 
@@ -364,7 +443,6 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
 
     
     cout << "\n=== RESULTADOS GENERALES ETAPA 2 ===" << endl;
-    mostrarResultados(alimentosEtapa2, tiempoConstruccion, PARTICIPANTES, Clasificados, "balsa");
 
 }
 
@@ -430,10 +508,9 @@ void RutaFinal(bool clasificados[] , int cantidad){
     const int HORAS = 24;
     const int KILOMETRAJE = 18; // Esto son kilometros
 
-
     float Tiempos[cantidad];
-    float Llego[cantidad];
-    float velocidad;
+    bool Llego[cantidad];
+    float velocidad, tiempo;
 
     srand(time(0));
 
@@ -479,6 +556,96 @@ void RutaFinal(bool clasificados[] , int cantidad){
             VelocidadFinal = VelocidadBase;
             break;
         }
+
+        tiempo = KILOMETRAJE / VelocidadFinal;
+        Tiempos[i]= tiempo;
+
+        if (tiempo <= HORAS){
+            Llego[i] = true;
+            cout << "→ Llegó en " << tiempo << " horas.\n";
+        }
+        else{
+            Llego[i] = false;
+            clasificados[i] = false;
+            cout << "→ NO llegó a tiempo. Queda descalificado.\n";
+        }
+        
     }
+    float tiempoMin;
+    int indiceMasRapido = participanteMasRapido(Tiempos,Llego,cantidad,tiempoMin);
+    mostrarResultadosOrdenados(Tiempos, Llego, cantidad);
+
+
     
+}
+
+int participanteMasRapido(float tiempos[], bool llego[], int cantidad, float &tiempoMin) {
+    tiempoMin = 999999;  
+    int indice = -1;
+
+    for (int i = 0; i < cantidad; i++) {
+        if (llego[i] && tiempos[i] < tiempoMin) {
+            tiempoMin = tiempos[i];
+            indice = i;
+        }
+    }
+
+    return indice;
+}
+
+void mostrarResultadosOrdenados(float tiempos[], bool llego[], int cantidad) {
+
+    int usado[100];
+    int orden[100];
+    float tiemposOrdenados[100];
+
+    for (int i = 0; i < cantidad; i++) {
+        usado[i] = 0;
+        tiemposOrdenados[i] = -1;
+    }
+
+    
+    for (int pos = 0; pos < cantidad; pos++) {
+
+        float minimo = 999999;
+        int indiceMin = -1;
+
+        for (int i = 0; i < cantidad; i++) {
+            if (llego[i] == true && usado[i] == 0) {
+                if (tiempos[i] < minimo) {
+                    minimo = tiempos[i];
+                    indiceMin = i;
+                }
+            }
+        }
+
+        if (indiceMin == -1) {
+            break; 
+        }
+
+        usado[indiceMin] = 1;
+        orden[pos] = indiceMin;
+        tiemposOrdenados[pos] = tiempos[indiceMin];
+    }
+
+    // Mostrar resultados
+    cout << "\n==== CLASIFICACIÓN ORDENADA ====\n";
+    cout << "Puesto  Participante  Tiempo\n";
+
+    int puesto = 1;
+
+    for (int i = 0; i < cantidad; i++) {
+
+        if (tiemposOrdenados[i] == -1) {
+            break; 
+        }
+
+        cout << puesto << "        "
+             << orden[i] + 1 << "            "
+             << tiemposOrdenados[i] << " horas\n";
+
+        puesto++;
+    }
+
+    cout << "===============================\n";
 }
