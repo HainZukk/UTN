@@ -1,42 +1,56 @@
 #include <iostream>
 #include <cstdlib>
 #include "funciones.h"
+#include "rlutil.h"
+using namespace rlutil;
 using namespace std;
 
-
-#include <iostream>
-using namespace std;
 
 void mostrarIntro() {
-    cout << "======================================================" << endl;
-    cout << "       BIENVENIDO AL CONCURSO DE SUPERVIVENCIA       " << endl;
-    cout << "======================================================" << endl;
+    const int WIDTH = 202;
+    const int HEIGHT = 53;
+    int centerX = WIDTH / 2;
+    int centerY = HEIGHT / 2;
 
-    cout << "        &&& &&  & &&" << endl;
-    cout << "     && &\\/&\\|& ()|/ @, &&" << endl;
-    cout << "     &\\/(/&/&||/& /_/)_&/_&" << endl;
-    cout << "  &() &\\/&|()|/&\\/ '%\" & ()" << endl;
-    cout << " &_\\_&&_\\ |& |&&/&__%_/_& &&" << endl;
-    cout << "&&   && & &| &| /& & % ()& /&&" << endl;
-    cout << " ()&_---()&\\&\\|&&-&&--%---()~" << endl;
-    cout << "     &&     \\|||" << endl;
-    cout << "             |||      /\\ " << endl;
-    cout << "             |||     /  \\ " << endl;
-    cout << "             |||    /____\\ " << endl;
-    cout << "             |||    |  __| " << endl;
-    cout << "             |||    | |  | " << endl;
-    cout << "             |||    | |__| " << endl;
-    cout << "             |||    |_____| " << endl;
-    cout << "        ~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cls(); 
 
-    cout << "\nPrepárate para recolectar alimentos, construir refugios\n";
-    cout << "y sobrevivir 7 días en la selva tropical!\n";
-    cout << "======================================================\n\n";
+    // Título
+    setColor(LIGHTCYAN);
+    locate(centerX - 30, centerY - 15); cout << "==============================================================";
+    locate(centerX - 30, centerY - 14); cout << "||                     BIENVENIDO AL                        ||";
+    locate(centerX - 30, centerY - 13); cout << "||                   CONCURSO DE SUPERVIVENCIA             ||";
+    locate(centerX - 30, centerY - 12); cout << "==============================================================";
 
-    cout << "Presiona Enter para continuar...";
+    // Barco
+    setColor(LIGHTCYAN);
+    locate(centerX - 20, centerY - 7);  cout << "           |    |    |";
+    locate(centerX - 20, centerY - 6);  cout << "          )_)  )_)  )_)";
+    locate(centerX - 20, centerY - 5);  cout << "         )___))___))___)\\";
+    locate(centerX - 20, centerY - 4);  cout << "        )____)____)_____)\\\\";
+    locate(centerX - 20, centerY - 3);  cout << "      _____|____|____|____\\\\\\__";
+    locate(centerX - 20, centerY - 2);  cout << "------\\                   /---------";
+    locate(centerX - 20, centerY - 1);  cout << "  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^";
+    locate(centerX - 20, centerY);      cout << "    ^^^^      ^^^^      ^^^";
+
+    // Mensaje
+    setColor(WHITE);
+    locate(centerX - 40, centerY + 3); cout << "Prepárate para navegar, recolectar recursos y sobrevivir";
+    locate(centerX - 40, centerY + 4); cout << "Desafiando tus capacidades en cada etapa!";
+
+    // Presiona ENTER
+    setColor(YELLOW);
+    locate(centerX - 15, centerY + 7); cout << "Presiona ENTER para comenzar...";
     cin.ignore();
     cin.get();
+
+    // Mensaje de carga
+    locate(centerX - 12, centerY + 9); cout << "Cargando el juego ......";
+    cout.flush();
+    msleep(2000);
+
+    cls();
 }
+
 
 
 void menuPrincipal() {
@@ -52,11 +66,12 @@ void menuPrincipal() {
 
         switch (opcion) {
             case 1:
-                system("clear");
+                cls();
                 jugar();
                 break;
             case 2:
                 cout << "Saliendo del juego..." << endl;
+                cls();
                 break;
             default:
                 cout << "Opción inválida." << endl;
@@ -104,7 +119,6 @@ void jugar() {
 
         tiempoRefugio[i] = diasRefugio;
 
-        // Verificamos el porcentaje del refugio
         if (kgAlimentos[i] >= 14 && porcentajeRefugio[i] == 100) {
             clasificado[i] = true;
         }
@@ -136,14 +150,27 @@ void jugar() {
     cout << "\nPresiona Enter para continuar a la Etapa 2..." << endl;
     cin.ignore();
     cin.get();
+
+    cout << "\nCargando Etapa 2..." << endl;
+    msleep(2000);
+    cls();
+
     
     // Etapa 2
     Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
-    
+
     if (!hayAlgunClasificado(clasificado,PARTICIPANTES)){
         cout << "\nNingún participante clasificó a la siguiente etapa. Fin del juego.\n";
         return;
     }
+
+    cout << "\nPresiona Enter para continuar a la Etapa 3..." << endl;
+    cin.ignore();
+    cin.get();
+
+    cout << "\nCargando Etapa 3..." << endl;
+    msleep(2000);
+    cls();
 
     // Etapa 3
     RutaFinal(clasificado,PARTICIPANTES);
