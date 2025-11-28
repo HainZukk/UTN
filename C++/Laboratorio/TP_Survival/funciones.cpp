@@ -326,7 +326,7 @@ float recolectarAlimentos() {
 
     switch (tipo) {
         case 1:
-            recolectado = generarRandom(14,20); // Modificacion para probar
+            recolectado = generarRandom(5,10); // Modificacion para probar
             break;
         case 2:
             recolectado = generarRandom(4,8);
@@ -362,7 +362,7 @@ float recolectarMateriales(float porcentajeRefugio) {
 
     switch (tipo) {
         case 1: 
-            recolectado = generarRandom(80,100); // Cambiar esto 
+            recolectado = generarRandom(20,60); 
             break;
         case 2: 
             recolectado = generarRandom(9,20); 
