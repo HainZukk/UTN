@@ -6,53 +6,6 @@ using namespace rlutil;
 using namespace std;
 
 
-void mostrarIntro() {
-    const int WIDTH = 202;
-    const int HEIGHT = 53;
-    int centerX = WIDTH / 2;
-    int centerY = HEIGHT / 2;
-
-    cls(); 
-
-    // Título
-    setColor(LIGHTCYAN);
-    locate(centerX - 30, centerY - 15); cout << "==============================================================";
-    locate(centerX - 30, centerY - 14); cout << "||                     BIENVENIDO AL                        ||";
-    locate(centerX - 30, centerY - 13); cout << "||                   CONCURSO DE SUPERVIVENCIA             ||";
-    locate(centerX - 30, centerY - 12); cout << "==============================================================";
-
-    // Barco
-    setColor(LIGHTCYAN);
-    locate(centerX - 20, centerY - 7);  cout << "           |    |    |";
-    locate(centerX - 20, centerY - 6);  cout << "          )_)  )_)  )_)";
-    locate(centerX - 20, centerY - 5);  cout << "         )___))___))___)\\";
-    locate(centerX - 20, centerY - 4);  cout << "        )____)____)_____)\\\\";
-    locate(centerX - 20, centerY - 3);  cout << "      _____|____|____|____\\\\\\__";
-    locate(centerX - 20, centerY - 2);  cout << "------\\                   /---------";
-    locate(centerX - 20, centerY - 1);  cout << "  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^";
-    locate(centerX - 20, centerY);      cout << "    ^^^^      ^^^^      ^^^";
-
-    // Mensaje
-    setColor(WHITE);
-    locate(centerX - 40, centerY + 3); cout << "Prepárate para navegar, recolectar recursos y sobrevivir";
-    locate(centerX - 40, centerY + 4); cout << "Desafiando tus capacidades en cada etapa!";
-
-    // Presiona ENTER
-    setColor(YELLOW);
-    locate(centerX - 15, centerY + 7); cout << "Presiona ENTER para comenzar...";
-    cin.ignore();
-    cin.get();
-
-    // Mensaje de carga
-    locate(centerX - 12, centerY + 9); cout << "Cargando el juego ......";
-    cout.flush();
-    msleep(2000);
-
-    cls();
-}
-
-
-
 void menuPrincipal() {
     int opcion = 0;
 
@@ -72,6 +25,9 @@ void menuPrincipal() {
             case 2:
                 cout << "Saliendo del juego..." << endl;
                 cls();
+                break;
+            case 3:
+                cout << "Creditos - Nguyen Tobias - Legajo 32580";
                 break;
             default:
                 cout << "Opción inválida." << endl;
@@ -135,9 +91,6 @@ void jugar() {
         }
     }
 
-    // Mostrar datos =================================================================================
-
-    // mostrarResultados(kgAlimentos, tiempoRefugio, PARTICIPANTES, clasificado, "Refugio");
 
     // Mostrar tabla ordenada de la Etapa 1
     mostrarResultadosEtapa1(kgAlimentos, tiempoRefugio, clasificado, PARTICIPANTES);
@@ -158,6 +111,8 @@ void jugar() {
     
     // Etapa 2
     Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
+    mostrarResultadosEtapa2(alimentosEtapa2, tiempoConstruccion, clasificado, PARTICIPANTES);
+
 
     if (!hayAlgunClasificado(clasificado,PARTICIPANTES)){
         cout << "\nNingún participante clasificó a la siguiente etapa. Fin del juego.\n";
@@ -198,7 +153,6 @@ void mostrarResultadosEtapa1(float kgAlimentos[], int tiempoRefugio[], bool clas
     bool usados[100] = {0}; 
     int puesto = 1;
 
-    // Mostrar clasificados ordenados
     for (int p = 0; p < participantes; p++) {
         int indiceMin = -1;
         int minTiempo = 9999;
@@ -240,6 +194,58 @@ void mostrarResultadosEtapa1(float kgAlimentos[], int tiempoRefugio[], bool clas
 
     cout << "===============================" << endl;
 }
+
+// Funcion para mostrar Datos Etapa 2
+void mostrarResultadosEtapa2(float alimentosEtapa2[], int tiempoConstruccion[], bool Clasificados[], int participantes) {
+    cout << "\n==== RESULTADOS ETAPA 2 - CONSTRUCCIÓN DE BALSA ====" << endl;
+    cout << "Puesto  Participante  Tiempo(días)  Alimentos(kg)" << endl;
+
+    bool usados[100] = {0}; 
+    int puesto = 1;
+
+    // Mostrar clasificados ordenados
+    for (int p = 0; p < participantes; p++) {
+        int indiceMin = -1;
+        int minTiempo = 9999;
+        float maxAlimentos = -1;
+
+        for (int i = 0; i < participantes; i++) {
+            if (Clasificados[i] && !usados[i]) {
+                if (tiempoConstruccion[i] < minTiempo) {
+                    minTiempo = tiempoConstruccion[i];
+                    maxAlimentos = alimentosEtapa2[i];
+                    indiceMin = i;
+                } else if (tiempoConstruccion[i] == minTiempo && alimentosEtapa2[i] > maxAlimentos) {
+                    maxAlimentos = alimentosEtapa2[i];
+                    indiceMin = i;
+                }
+            }
+        }
+
+        if (indiceMin == -1) break; 
+        usados[indiceMin] = true;
+
+        cout << puesto << "        "
+             << "Participante " << indiceMin + 1 << "      "
+             << tiempoConstruccion[indiceMin] << "             "
+             << alimentosEtapa2[indiceMin] << endl;
+
+        puesto++;
+    }
+
+    // Mostrar descalificados al final
+    cout << "\n--- Descalificados ---" << endl;
+    for (int i = 0; i < participantes; i++) {
+        if (!Clasificados[i]) {
+            cout << "Participante " << i + 1
+                 << "   Tiempo: -"
+                 << "   Alimentos: " << alimentosEtapa2[i] << endl;
+        }
+    }
+
+    cout << "===============================" << endl;
+}
+
 
 
 
@@ -533,7 +539,7 @@ float simularVelocidad() {
 void RutaFinal(bool clasificados[] , int cantidad){
 
     const int HORAS = 24;
-    const int KILOMETRAJE = 18; // Esto son kilometros
+    const int KILOMETRAJE = 18; 
 
     float Tiempos[cantidad];
     bool Llego[cantidad];
