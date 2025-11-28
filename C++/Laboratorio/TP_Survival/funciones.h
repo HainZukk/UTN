@@ -28,6 +28,8 @@ float promedioAlimentosEtapa2(float kgAlimentos[], bool clasificados[], int part
 void mostrarSuperaronPromedioEtapa2(float kgAlimentos[], bool clasificados[], int participantes);
 void mostrarMasRapidoEnConstruir(int tiempoConstruccion[], bool clasificados[], int participantes);
 int generarRandom(int min, int max);
+//Nueva funcion para mostrar en tabla
+void mostrarResultadosEtapa2(float alimentosEtapa2[], int tiempoConstruccion[], bool Clasificados[], int participantes);
 
 // Etapa 3
 float simularVelocidad();
