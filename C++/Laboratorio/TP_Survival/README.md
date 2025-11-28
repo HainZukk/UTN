@@ -218,3 +218,10 @@ Usando el Makefile
 - [x] Modificacion de algunas funciones en el archivo `funciones.h`.
 - [x] Impementacion de funcion para la Etapa 2 (`mostrarSuperaronPromedioEtapa2()`).
 - [x] Implementacion de funcion para la Etapa 2 (`promedioAlimentosEtapa2()`).
+
+## Avances 28/11/25 - 02:09
+- [x] Modularizando el codigo de nuestra intro ---> `intro.cpp` y definida en ---> `funciones.h`
+- [x] Deteccion de error en la suma de valores de KgAlimentos ET1 Y ET2 (Ahora ET2 es independiente)
+- [x] Implementacion de Visualizacion de Datos ET3 
+- [x] Nueva Carpeta `/Utils` ---> `rlutil.h` 
+- [x] Cambios de color y diseño en la intro
