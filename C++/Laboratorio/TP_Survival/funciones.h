@@ -23,7 +23,7 @@ void mostrarResultadosEtapa1(float kgAlimentos[], int tiempoRefugio[], bool clas
 bool hayAlgunClasificado(bool clasificados[], int participantes); // nueva funcion para clasificados
 
 // Etapa 2
-void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[], float alimentosEtapa2[], int tiempoConstruccion[]);
+void Construir_Balsa(bool Clasificados[], float alimentosEtapa2[], int tiempoConstruccion[]);
 float promedioAlimentosEtapa2(float kgAlimentos[], bool clasificados[], int participantes);
 void mostrarSuperaronPromedioEtapa2(float kgAlimentos[], bool clasificados[], int participantes);
 void mostrarMasRapidoEnConstruir(int tiempoConstruccion[], bool clasificados[], int participantes);

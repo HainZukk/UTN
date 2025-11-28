@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "funciones.h"
-#include "rlutil.h"
+#include "utils/rlutil.h"
 using namespace rlutil;
 using namespace std;
 
@@ -110,7 +110,7 @@ void jugar() {
 
     
     // Etapa 2
-    Construir_Balsa(kgAlimentos, clasificado, alimentosEtapa2, tiempoConstruccion);
+    Construir_Balsa(clasificado, alimentosEtapa2, tiempoConstruccion);
     mostrarResultadosEtapa2(alimentosEtapa2, tiempoConstruccion, clasificado, PARTICIPANTES);
 
 
@@ -326,7 +326,7 @@ float recolectarAlimentos() {
 
     switch (tipo) {
         case 1:
-            recolectado = generarRandom(3,8);
+            recolectado = generarRandom(14,20); // Modificacion para probar
             break;
         case 2:
             recolectado = generarRandom(4,8);
@@ -362,7 +362,7 @@ float recolectarMateriales(float porcentajeRefugio) {
 
     switch (tipo) {
         case 1: 
-            recolectado = generarRandom(7,15); 
+            recolectado = generarRandom(80,100); // Cambiar esto 
             break;
         case 2: 
             recolectado = generarRandom(9,20); 
@@ -389,7 +389,7 @@ float recolectarMateriales(float porcentajeRefugio) {
 
 // Etapa 2: 
 
-void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimentosEtapa2[], int tiempoConstruccion[]) {
+void Construir_Balsa(bool Clasificados[], float alimentosEtapa2[], int tiempoConstruccion[]) {
     const int PARTICIPANTES = 8;
     const int DIAS = 6;
     const float ALIMENTO_MINIMO = 14.0;
@@ -400,11 +400,11 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
     srand(time(NULL));
 
     for (int i = 0; i < PARTICIPANTES; i++) {
-        if (!Clasificados[i]) continue; // salta los descalificados
+        if (!Clasificados[i]) continue; 
 
         cout << "\n===== Etapa 2 - Participante " << i + 1 << " =====" << endl;
 
-        float kgAlimentos = ExcedenteAlimento[i];
+        float kgAlimentos = 0; 
         int tiempoBalsa = 0;
 
         for (int dia = 1; dia <= DIAS; dia++) {
@@ -420,11 +420,10 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
             }
 
             if (eleccion == 1) {
-                float recolectado = generarRandom(2, 6);
+                float recolectado = generarRandom(14, 16);
                 kgAlimentos += recolectado;
                 cout << "Recolectó " << recolectado << " kg de alimentos. Total: " << kgAlimentos << " kg" << endl;
-            }
-            else if (eleccion == 2 && porcentajeBalsa[i] < 100) {
+            } else if (eleccion == 2 && porcentajeBalsa[i] < 100) {
                 cout << "Materiales disponibles:" << endl;
                 cout << "1. Troncos de árboles (20-35%)" << endl;
                 cout << "2. Hojas de palmera (10-20%)" << endl;
@@ -433,15 +432,9 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
 
                 float avance = 0;
                 switch (material) {
-                    case 1: 
-                        avance = generarRandom(20, 35); 
-                        break;
-                    case 2: 
-                        avance = generarRandom(10, 20); 
-                        break;
-                    case 3: 
-                        avance = generarRandom(15, 25); 
-                        break;
+                    case 1: avance = generarRandom(20, 35); break;
+                    case 2: avance = generarRandom(10, 20); break;
+                    case 3: avance = generarRandom(15, 25); break;
                     default:
                         cout << "Opción inválida. Se pierde el día." << endl;
                         continue;
@@ -452,13 +445,11 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
                 tiempoBalsa++;
 
                 cout << "Avance en la construcción: " << porcentajeBalsa[i] << "%" << endl;
-            }
-            else {
+            } else {
                 cout << "Opción inválida." << endl;
             }
         }
 
-        // Guardar los resultados de cada participante
         alimentosEtapa2[i] = kgAlimentos;
         tiempoConstruccion[i] = tiempoBalsa;
 
@@ -466,18 +457,15 @@ void Construir_Balsa(float ExcedenteAlimento[], bool Clasificados[],float alimen
         if (porcentajeBalsa[i] >= 100 && kgAlimentos >= ALIMENTO_MINIMO) {
             cout << "Clasificado a la siguiente etapa!" << endl;
             Clasificados[i] = true;
-            ExcedenteAlimento[i] = kgAlimentos - ALIMENTO_MINIMO;
         } else {
             cout << "Descalificado. No cumplió los requisitos." << endl;
             Clasificados[i] = false;
-            ExcedenteAlimento[i] = 0;
         }
     }
 
-    
     cout << "\n=== RESULTADOS GENERALES ETAPA 2 ===" << endl;
-
 }
+
 
 // Etapa 2 - Procesamiento de datos ==============================================================
 
