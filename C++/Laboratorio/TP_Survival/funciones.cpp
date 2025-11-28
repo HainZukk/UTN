@@ -326,7 +326,7 @@ float recolectarAlimentos() {
 
     switch (tipo) {
         case 1:
-            recolectado = generarRandom(5,10); // Modificacion para probar
+            recolectado = generarRandom(5,10); 
             break;
         case 2:
             recolectado = generarRandom(4,8);
@@ -354,15 +354,15 @@ float recolectarMateriales(float porcentajeRefugio) {
     float recolectado = 0;
 
     cout << "Ha elegido recolectar materiales" << endl;
-    cout << "1- Ramas de árboles" << endl;
-    cout << "2- Ramas de arbustos" << endl;
-    cout << "3- Barro" << endl;
-    cout << "4- Rocas" << endl;
+    cout << "1- Ramas de árboles (8-15%)" << endl;
+    cout << "2- Ramas de arbustos (9-20%)" << endl;
+    cout << "3- Barro (10-30%)" << endl;
+    cout << "4- Rocas (1-60%)" << endl;
     cin >> tipo;
 
     switch (tipo) {
         case 1: 
-            recolectado = generarRandom(20,60); 
+            recolectado = generarRandom(8,15); 
             break;
         case 2: 
             recolectado = generarRandom(9,20); 
@@ -371,7 +371,7 @@ float recolectarMateriales(float porcentajeRefugio) {
             recolectado = generarRandom(10,30);
             break;
         case 4: 
-            recolectado = generarRandom(1,40);
+            recolectado = generarRandom(1,60);
             break;
         default:
             cout << "Opción inválida." << endl;
