@@ -6,13 +6,11 @@ using namespace std;
 
 void LecturaNums(){
 
-    int suma = 0;
-    int mayores_al_promedio[5];
+    int suma = 0; // Contador 
+    const int TAMANIO = 5; // Definicion de tamanio de nuestro vector
+    int vec[TAMANIO] = {1,3,70,60,1}; // Datos de nuestro vector
 
-    const int TAMANIO = 5;
-    int vec[TAMANIO] = {1,3,70,60,1};
-
-    for (int i = 0; i < TAMANIO; i++){
+    for (int i = 0; i < TAMANIO; i++){ 
         suma += vec[i];
     }
 
