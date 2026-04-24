@@ -23,7 +23,7 @@ void menuPrincipal() {
                 jugar();
                 break;
             case 2:
-                cout << "Creditos - Nguyen Tobias - Legajo 32580" << endl;
+                creditos();
                 break;
             case 3:
                 cout << "Saliendo del juego..." << endl;
@@ -669,4 +669,8 @@ void mostrarResultadosOrdenados(float tiempos[], bool llego[], int cantidad) {
     }
 
     cout << "===============================\n";
+}
+
+void creditos(){
+    cout << "Creditos - Nguyen Tobias - Legajo 32580" << endl;
 }

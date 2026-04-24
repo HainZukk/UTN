@@ -36,4 +36,8 @@ float simularVelocidad();
 void RutaFinal(bool clasificados[], int cantidad);
 int participanteMasRapido(float Tiempos[], bool clasificados[], int cantidad, float &tiempoMin);
 void mostrarResultadosOrdenados(float tiempos[], bool llego[], int cantidad);
+
+// Nuevo 2026
+void creditos();
+
 #endif
