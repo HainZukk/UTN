@@ -7,13 +7,13 @@ using namespace std;
 
 
 void menuPrincipal() {
-    int opcion = 0;
-
-    while (opcion != 2) {
+    int opcion;
+    do{
         cout << "======================================================" << endl;
         cout << "Bienvenido/a al concurso de supervivencia" << endl;
         cout << "1. Juego nuevo" << endl;
-        cout << "2. Salir" << endl;
+        cout << "2. Creditos" << endl;
+        cout << "3. Salir" << endl;
         cout << "======================================================" << endl;
         cin >> opcion;
 
@@ -23,17 +23,17 @@ void menuPrincipal() {
                 jugar();
                 break;
             case 2:
-                cout << "Saliendo del juego..." << endl;
-                cls();
+                cout << "Creditos - Nguyen Tobias - Legajo 32580";
                 break;
             case 3:
-                cout << "Creditos - Nguyen Tobias - Legajo 32580";
+                cout << "Saliendo del juego..." << endl;
                 break;
             default:
                 cout << "Opción inválida." << endl;
                 break;
         }
-    }
+    }while (opcion != 3);
+    
 }
 
 void jugar() {
