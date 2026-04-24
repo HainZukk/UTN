@@ -23,7 +23,7 @@ void menuPrincipal() {
                 jugar();
                 break;
             case 2:
-                cout << "Creditos - Nguyen Tobias - Legajo 32580";
+                cout << "Creditos - Nguyen Tobias - Legajo 32580" << endl;
                 break;
             case 3:
                 cout << "Saliendo del juego..." << endl;
@@ -32,7 +32,7 @@ void menuPrincipal() {
                 cout << "Opción inválida." << endl;
                 break;
         }
-    }while (opcion != 3);
+    } while (opcion != 3);
     
 }
 
