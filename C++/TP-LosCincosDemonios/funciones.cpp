@@ -1,11 +1,8 @@
 #include <iostream>
 #include "funciones.h"
 #include <cstdlib>
-
-// Constantes globales de tipo vector que almacenan los nombres y los elementos .
-const string NOMBRES[]   = {"Baramos", "Dracolord", "Darck", "WhiteKing", "Lazamanus"};
-const string ELEMENTOS[] = {"Sombra del Fuego", "Sombra del Agua", "Sombra de la Tierra", "Sombra del Aire", "Sombra Mayor"};
-const int CANT_DEMONIOS  = 5; // Constante para comparar si hay demonios sellados.
+#include <ctime>
+using namespace std;
 
 void menuPrincipal(){
     int opcion;
@@ -25,7 +22,7 @@ void menuPrincipal(){
             jugar();
             break;
       case 2: 
-            // Aca van los creditos
+            // Aca van las estadisticas
             break;
       case 3:
             cout << "Creditos" << endl;
@@ -40,9 +37,13 @@ void menuPrincipal(){
 void jugar(){
     string nombreDescendiente;
     const int TIRADAS_TOTALES = 15; 
-    int demoniosSellados = 0; // Contador.
+    int demoniosSellados = 0; //Contador de demonios sellados
     int tiradaActual = 0;
     bool estado_sigilos[5] = {false,false,false,false,false};
+
+    const string NOMBRES[]   = {"Baramos", "Dracolord", "Darck", "WhiteKing", "Lazamanus"};
+    const string ELEMENTOS[] = {"Sombra del Fuego", "Sombra del Agua", "Sombra de la Tierra", "Sombra del Aire", "Sombra Mayor"};
+    const int CANT_DEMONIOS  = 5; // Constante para comparar si hay demonios sellados.
 
 
     cout << "-----------------------------------------------------" << endl;
@@ -55,7 +56,10 @@ void jugar(){
     cout << "Ingrese el nombre del descendiente: ";
     cin >> nombreDescendiente;
 
+    srand(time(NULL)); 
+
     while (tiradaActual < TIRADAS_TOTALES && demoniosSellados < CANT_DEMONIOS){
+
         tiradaActual++;
 
         cout << "\nLOS CINCO DEMONIOS" << endl;
@@ -64,23 +68,62 @@ void jugar(){
         cout << "DESCENDIENTE: " << nombreDescendiente << endl;
 
         //Llamada a la funcion para saber el estado de los demonios.
-        mostrarEstadoDeSigilos(estado_sigilos);
+        mostrarEstadoDeSigilos(estado_sigilos,NOMBRES,ELEMENTOS,CANT_DEMONIOS);
+        cout << "-------------------";
+        cout << "Presione ENTER para tirar los dados...";
+        cin.ignore();
+        cin.get();
+
+        int dado1 = tirarDado();
+        int dado2 = tirarDado();
+        cout << "Tirada de dados: [" << dado1 << "] [" << dado2 << "]" << endl;
+
     }
     
 
 }
 
-void mostrarEstadoDeSigilos(bool estado_sigilos[]){
+void mostrarEstadoDeSigilos(bool estado_sigilos[],const string NomDemonios[],const string ElementosDemonios[],int cantDemonios){
     cout << "ESTADO DE LOS SIGILOS: " << endl;
-    for (int i = 0; i < CANT_DEMONIOS ; i++){
+    for (int i = 0; i < cantDemonios ; i++){
         if (estado_sigilos[i]){
             cout << "[ SELLADO ] ";
         }
         else{
             cout << "[ LIBRE ] ";
         }
-        cout << NOMBRES[i] << " - " << ELEMENTOS[i] << endl;
+        cout << NomDemonios[i] << " - " << ElementosDemonios[i] << endl;
         
     }
     
+}
+
+int tirarDado(){
+    return (rand() % 6) + 1;
+}
+
+
+//Funcion para evaluar que demonios podemos cerrar
+void EvaluarTirada(int dado1,int dado2,bool demonios_disponibles[] , int cantDemonios){
+    int sumaDados = dado1 + dado2;
+
+    // Baramos
+    if (!demonios_disponibles[0] && dado1 == dado2){
+        demonios_disponibles[0] = true;
+    }
+    //Dracolord
+    if (!demonios_disponibles[1] && sumaDados == 7){
+        demonios_disponibles[1] = true;
+    }
+    //Darck
+
+    //Whiteking
+    if (!demonios_disponibles[3] && sumaDados >= 10){
+        demonios_disponibles[3] = true;
+    }
+    
+    
+    
+    
+
 }
