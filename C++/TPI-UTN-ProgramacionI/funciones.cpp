@@ -10,7 +10,7 @@ string solicitarNombreDescendiente()
     string nombreJugadorActual;
     char confirmar;
 
-    // TODO: FALTARIA AJUSTAR QUE CUANDO INGRESA UN SI o un si, LO TOME
+    // TODO: FALTARIA AJUSTAR QUE CUANDO INGRESA UN SI o un si, LO TOME (HECHO PAU)
     do
     {
         cout << " ----------- Ingrese el nombre del jugador: -----------" << endl;
@@ -21,14 +21,13 @@ string solicitarNombreDescendiente()
         cout << " ::: Confirmar (S/N) :::" << endl;
         cin >> confirmar;
         cout << endl;
-    } while (confirmar != 'S');
+    } while (confirmar != 'S' && confirmar != 's');
 
     return nombreJugadorActual;
 }
 
 // Fn que muestra msj de derrota
-void showMessageDefeat(string nombreJugadorActual, const int TIRADAS_TOTALES)
-{
+void showMessageDefeat(string nombreJugadorActual, const int TIRADAS_TOTALES, bool estado_sigilos[], const string NOMBRES_DEMONIOS[], const int CANT_DEMONIOS){
     // TODO: Falta colocar los nombres de los demonios sellados y demonios libres
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " << endl;
     cout << endl
@@ -42,8 +41,9 @@ void showMessageDefeat(string nombreJugadorActual, const int TIRADAS_TOTALES)
          << "::: FIN DE LA PARTIDA - DERROTA :::" << endl;
     cout << endl
          << TIRADAS_TOTALES << " invocaciones agotadas" << endl;
-    cout << "Demonios sellados:" << endl;
-    cout << "Demonios libres" << endl;
+
+    //Funcion para estado de los demonios (SELLADO - LIBRE)
+    DemoniosPorEstado(estado_sigilos, NOMBRES_DEMONIOS, CANT_DEMONIOS);
     cout << endl
          << "Presiona cualquier tecla para continuar..." << endl;
     cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
@@ -162,10 +162,10 @@ void lore(string nombreJugadorActual)
 }
 
 // Funcion de derrota
-void derrota(int &derrotasTotales, string nombreJugadorActual, const int TIRADAS_TOTALES)
+void derrota(int &derrotasTotales, string nombreJugadorActual, const int TIRADAS_TOTALES, bool estado_sigilos[], const string NOMBRES_DEMONIOS[], const int CANT_DEMONIOS)
 {
     derrotasTotales++;
-    showMessageDefeat(nombreJugadorActual, TIRADAS_TOTALES);
+    showMessageDefeat(nombreJugadorActual, TIRADAS_TOTALES, estado_sigilos, NOMBRES_DEMONIOS, CANT_DEMONIOS);
 }
 
 // funcion de victoria
@@ -256,7 +256,8 @@ void jugar(string &nombreJugadorActual, string &nombreJugadorGuardado, int &invo
 
             if (!estado_sigilos[4]){
                 if (lazamanusEvent(nombreJugadorActual)){
-                    derrota(derrotasTotales,nombreJugadorActual,TIRADAS_TOTALES);
+                    derrota(derrotasTotales, nombreJugadorActual, TIRADAS_TOTALES, estado_sigilos, NOMBRES_DEMONIOS, CANT_DEMONIOS);
+
                     return;
                 }
             }
@@ -282,7 +283,7 @@ void jugar(string &nombreJugadorActual, string &nombreJugadorGuardado, int &invo
 
     else
     {
-        derrota(derrotasTotales, nombreJugadorActual, TIRADAS_TOTALES);
+        derrota(derrotasTotales, nombreJugadorActual, TIRADAS_TOTALES, estado_sigilos, NOMBRES_DEMONIOS, CANT_DEMONIOS);
     }
 }
 
@@ -446,4 +447,26 @@ bool lazamanusEvent(string nombreJugadorActual){
     
     cout << "Lograste escapar de Lazamanus ... Por ahora" << endl;
     return false;
+}
+
+
+
+// Funcion para estadistica
+void DemoniosPorEstado(bool estado_sigilos[],const string NOMBRES_DEMONIOS[] , const int CANT_DEMONIOS){
+    cout << "Demonios sellados:" << endl;
+
+    for (int i = 0; i < CANT_DEMONIOS; i++){
+        if (estado_sigilos[i]){
+            cout << "- " << NOMBRES_DEMONIOS[i] << endl;
+        }
+    }
+
+    cout << "Demonios libres:" << endl;
+    for (int i = 0; i < CANT_DEMONIOS; i++){
+        if (!estado_sigilos[i]){
+            cout << "- " << NOMBRES_DEMONIOS[i] << endl;
+
+        }
+            
+    }
 }

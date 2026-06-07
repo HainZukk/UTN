@@ -16,10 +16,11 @@ void mostrarEstadoDeSigilos(bool estado_sigilos[], const string NomDemonios[], c
 int tirarDado();
 void lore(string nombreJugadorActual);
 
-void showMessageDefeat(string nombreJugadorActual, const int TIRADAS_TOTALES);
+void showMessageDefeat(string nombreJugadorActual, const int TIRADAS_TOTALES, bool estado_sigilos[], const string NOMBRES_DEMONIOS[], const int CANT_DEMONIOS);
 
 void ganar(int &victoriasTotales, int demoniosSellados, int CANT_DEMONIOS, string &nombreJugadorGuardado, string nombreJugadorActual, int tiradaActual, int &invocacionesJugadorGuardado);
-void derrota(int &derrotasTotales, string nombreJugadorActual, const int TIRADAS_TOTALES);
+//Actualizamos funcion de derrota para que se pueda utilizar la funcion de estadisticas.
+void derrota(int &derrotasTotales, string nombreJugadorActual, const int TIRADAS_TOTALES, bool estado_sigilos[], const string NOMBRES_DEMONIOS[], const int CANT_DEMONIOS);
 
 void EvaluarTirada(int dado1, int dado2, bool estado_sigilos[], bool demonios_disponibles[], int cantDemonios);
 int contarDisponibles(bool demoniosDisponibles[], int cantDemonios);
@@ -30,5 +31,8 @@ int elegirDemonio(int cantOpciones);
 
 
 bool lazamanusEvent(string nombreJugadorActual);
+
+//Funcion para estadisticas
+void DemoniosPorEstado(bool estado_sigilos[], const string NOMBRES_DEMONIOS[], const int CANT_DEMONIOS);
 
 #endif
