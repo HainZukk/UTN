@@ -316,7 +316,7 @@ void creditos()
     // TODO: Faltan agregar los numeros de los legajos
     string apellido1 = "Nguyen ";
     string apellido2 = "Rodriguez ";
-    int legajo1 = 1;
+    int legajo1 = 32580;
     int legajo2 = 31;
     string nombre1 = "Tobias";
     string nombre2 = "Paula";
