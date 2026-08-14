@@ -60,8 +60,13 @@ int main(){
     float totalPorCategoria[MAX_CAT] = {0};
     int cantidadPorDia[MAX_DIAS] = {0};
 
-    cout << "Ingrese el dia (0 para finalizar)" << endl;
-    cin >> dia;
+    do {
+        cout << "Ingrese el dia (0 para finalizar): ";
+        cin >> dia;
+            if (dia < 0 || dia > MAX_DIAS){
+                cout << "Ingrese un dia valido (0 para finalizar)" << endl;
+            }
+    } while (dia < 0 || dia > MAX_DIAS);
 
     while (dia != 0){
         do {
@@ -81,8 +86,13 @@ int main(){
         cantidadPorDia[dia-1]++;
 
 
-        cout << "Ingrese el dia (0 para finalizar)" << endl;
-        cin >> dia;
+        do {
+            cout << "Ingrese el dia (0 para finalizar): ";
+            cin >> dia;
+                if (dia < 0 || dia > MAX_DIAS){
+                    cout << "Ingrese un dia valido (0 para finalizar)" << endl;
+                }
+        } while (dia < 0 || dia > MAX_DIAS);
     }
 
     /*
@@ -96,15 +106,17 @@ int main(){
     /*
     B) Total por categoria
     */
+    cout << "\n--- B) Total por Categoria ---\n";
     mostrarPorCategoria(totalPorCategoria,nombresCategorias,MAX_CAT);
 
 
     // C
-
+    cout << "\n--- C) Categorias sin Movimientos---\n";
     int sinMovimientos = catSinMovimientos(totalPorCategoria,MAX_CAT);
     cout << "Cantidad de categorias sin movimientos es: " << sinMovimientos << endl;
 
     // D Gastos por Dia
+    cout << "\n--- D) Gastos por Dia ---\n";
     gastoPorDia(cantidadPorDia,MAX_DIAS);
 
     return 0;
