@@ -32,7 +32,7 @@ int main(){
 
     // Mostrar los valores de nuestro array
     for (int j = 0; j < tamanio; j++){
-        cout << array[j];
+        cout << array[j] << endl;
     }
 
     //liberacion de memoria 
