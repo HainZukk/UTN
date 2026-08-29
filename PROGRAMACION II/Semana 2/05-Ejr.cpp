@@ -7,7 +7,9 @@ Hacer una función que reciba un vector de enteros y su tamaño y luego muestre 
 using namespace std;
 
 void mostrarOrdenado(const int Vec[],int TAM);
+void mostrarVector(const int Vec[], int TAM);
 void ordenar(int *V, int TAM);
+void cargarVector(int Vec[],int TAM);
 
 int main()
 {
@@ -16,32 +18,27 @@ int main()
     int tamanio = 5;*/
 
     // Tam dinamico
-    int *vector = nullptr;
+    int *numeros = nullptr;
     int tamanio;
     cout << "Ingrese el tamaño del vector: ";
     cin >> tamanio;
 
-    vector = new int[tamanio];
+    numeros = new int[tamanio];
 
-    if (vector == nullptr){
+    if (numeros == nullptr){
         cout << "No hay memoria" << endl;
     }
 
-    cout << "Ingrese " << tamanio << " numeros enteros: " << endl;
-    for (int i = 0; i < tamanio; i++){
-        cin >> vector[i];
-    }
+    cargarVector(numeros,tamanio);
     
     system("clear"); 
 
-    mostrarOrdenado(vector, tamanio);
+    mostrarOrdenado(numeros, tamanio);
 
     cout << "Vector original (sin cambios): ";
-    for (int i = 0; i < tamanio; i++)
-        cout << vector[i] << " ";
-    cout << endl;
+    mostrarVector(numeros,tamanio);
 
-    delete[] vector;
+    delete[] numeros;
 
     return 0;
 }
@@ -73,12 +70,24 @@ void mostrarOrdenado(const int Vec[],int TAM){
     }
 
     ordenar(copia,TAM);
-
+    
     cout << "Vector ordenado: ";
-    for (int i = 0; i < TAM; i++){
-    cout << copia[i] << " ";
-    }
-    cout << endl;             
+    mostrarVector(copia, TAM);          
 
     delete[] copia;
+}
+
+void cargarVector(int Vec[],int TAM){
+
+    cout << "Ingrese " << TAM << " numeros enteros: " << endl;
+    for (int i = 0; i < TAM; i++){
+        cin >> Vec[i];
+    }
+}
+
+void mostrarVector(const int Vec[], int TAM){
+    for (int i = 0; i < TAM; i++){
+        cout << Vec[i] << " ";
+    }
+    cout << endl;
 }
