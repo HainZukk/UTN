@@ -5,8 +5,6 @@ using namespace std;
 #include "Fecha.h"
 #include "Domicilio.h"
 
-// ---------- Utilidades de entrada ----------
-
 int leerEntero(string mensaje){
     int valor;
     cout << mensaje;
@@ -26,12 +24,10 @@ string leerLinea(string mensaje){
     return valor;
 }
 
-// Convierte una fecha a un numero comparable AAAAMMDD
+
 int fechaAValor(Fecha f){
     return f.getAnio() * 10000 + f.getMes() * 100 + f.getDia();
 }
-
-// ---------- Opciones del menu ----------
 
 void cargarAlumnos(Alumno vec[], int cant){
     for(int i = 0; i < cant; i++){
@@ -122,8 +118,6 @@ void listarInscriptosAntesDe(Alumno vec[], int cant){
         cout << "\nNingun alumno se inscribio antes de " << limite.toString() << "." << endl;
 }
 
-// ---------- Menu principal ----------
-
 void menuPrincipal(){
     int opc;
     Alumno *vecAlumnos = nullptr;
@@ -139,7 +133,7 @@ void menuPrincipal(){
         return;
     }
 
-    // Solicito memoria para mi puntero
+    // Solicitamos memoria para nuestro puntero
     vecAlumnos = new Alumno[cant];
 
     // Compruebo que se haya podido reservar la memoria para el puntero
