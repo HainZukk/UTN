@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 #include <string>
-#include <Domicilio.h>
 #include "Alumno.h"
 
 
@@ -36,6 +35,10 @@ std::string Alumno::getNombre(){
 //}
 
 // Modificacion 31/Agosto
+Domicilio Alumno::getDomicilio(){
+  return _domicilio;
+}
+
 // std::string Alumno::getCalle(){
 //   return _calle;
 // }
@@ -94,6 +97,11 @@ void Alumno::setNombre(std::string nombre){
 
 // Modularizacion 31/Agosto Clase Domicilio
 
+// New setter 1 Septiembre
+void Alumno::setDomicilio(Domicilio domicilio){
+    _domicilio = domicilio;
+}
+
 // void Alumno::setCalle(std::string calle){
 //   _calle = calle;
 // }
@@ -143,13 +151,13 @@ void Alumno::mostrar(){
     cout << "Legajo: " << _legajo << endl;
     cout << "Apellido y nombre: " << _apellido << " " << _nombre << endl;
     cout << "Fecha de nacimiento: " << _nacimiento.toString("-") << endl;
-    // cout << "Domicilio: " << _calle << " " << _numero;
-    // if (!_piso.empty())
-    //     cout << " Piso " << _piso;
-    // if (!_departamento.empty())
-    //     cout << " Dpto " << _departamento;
-    // cout << endl;
-    // cout << "Localidad: " << _localidad << " (CP " << _codigoPostal << ")" << endl;
+    cout << "Domicilio: " << _domicilio.getCalle() << " " << _domicilio.getNumero();
+    if (!_domicilio.getPiso().empty())
+        cout << " Piso " << _domicilio.getPiso();
+    if (!_domicilio.getDepartamento().empty())
+        cout << " Dpto " << _domicilio.getDepartamento();
+    cout << endl;
+    cout << "Localidad: " << _domicilio.getLocalidad() << " (CP " << _domicilio.getCodigoPostal()<< ")" << endl;
     cout << "Telefono: " << _telefono << endl;
     cout << "Email: " << _email << endl;
     cout << "Fecha de ingreso: " << _ingreso.toString() << endl;

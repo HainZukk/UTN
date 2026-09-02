@@ -1,6 +1,6 @@
 #ifndef DOMICILIO_H_INCLUDED
 #define DOMICILIO_H_INCLUDED
-#include "Domicilio.cpp"
+#include <string>
 
 class Domicilio{
     private: 
@@ -11,7 +11,8 @@ class Domicilio{
     std::string  _localidad;
     std::string  _codigoPostal;
     public:
-    void mostrar();
+    void mostrarDomi();
+    //Constructor
     Domicilio(std::string calle = "",std::string num = "" ,std::string piso = "",std::string depto = "",std::string loc = "",std::string cp = "");
 
     //Setters

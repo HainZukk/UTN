@@ -2,13 +2,10 @@
 using namespace std;
 #include "Alumno.h"
 #include "Fecha.h"
-#include "Domicilio.h"
 
-int main()
-{
+int main(){
+
   Alumno alu;
-  Domicilio dom;
-  
 
   alu.setLegajo(34437);
   alu.setApellido("Chiotta");
@@ -24,9 +21,9 @@ int main()
   alu.setEmail("brian.chiotta@gmail.com");
   Fecha f(1, 3, 2026);
   alu.setFechaIngreso(f);
-
+  Domicilio aux("Nicolas Mascardi","2405","3","","Grand Bourg","1615B");
+  alu.setDomicilio(aux);
   alu.mostrar();
-
 
     return 0;
 }

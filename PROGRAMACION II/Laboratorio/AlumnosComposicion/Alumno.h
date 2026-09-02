@@ -1,7 +1,7 @@
 #ifndef ALUMNO_H_INCLUDED
 #define ALUMNO_H_INCLUDED
-
 #include "Fecha.h"
+#include "Domicilio.h"
 #include <string>
 
 class Alumno {
@@ -16,6 +16,7 @@ private:
   // std::string  _departamento;
   // std::string  _localidad;
   // std::string  _codigoPostal;
+  Domicilio _domicilio;
   std::string  _telefono;
   std::string  _email;
   Fecha _ingreso;
@@ -42,6 +43,9 @@ public:
   // void setDepartamento(std::string departamento);
   // void setLocalidad(std::string localidad);
   // void setCodigoPostal(std::string codigoPostal);
+  
+  // New 31 Agosto
+  void setDomicilio(Domicilio domicilio);
 
   void setTelefono(std::string telefono);
   void setEmail(std::string email);
@@ -52,6 +56,9 @@ public:
   std::string getApellido();
   std::string getNombre();
   Fecha getFechaNacimiento();
+
+  //New 31 de Agosto
+  Domicilio getDomicilio();
   // std::string getCalle();
   // std::string getNumero();
   // std::string getPiso();
