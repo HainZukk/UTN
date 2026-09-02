@@ -2,6 +2,7 @@
 using namespace std;
 #include "Alumno.h"
 #include "Fecha.h"
+#include "Docente.h"
 
 int main(){
 
@@ -25,5 +26,24 @@ int main(){
   alu.setDomicilio(aux);
   alu.mostrar();
 
-    return 0;
+  cout << endl;
+
+  // ----- Docente -----
+  Docente doc;
+  doc.setLegajo(501);
+  doc.setApellido("Perez");
+  doc.setNombre("Ana");
+  doc.setCuil("27-30111222-4");
+  doc.setFechaNacimiento(15, 6, 1985);
+  doc.setFechaContratacion(1, 3, 2015);
+  doc.setTelefono("011-5555-6666");
+  doc.setEmail("ana.perez@instituto.edu");
+  Domicilio auxDoc("Av. Corrientes","1234","5","A","CABA","C1043");
+  doc.setDomicilio(auxDoc);
+ 
+  doc.mostrar();
+  cout << "CSV: " << doc.toCSV() << endl;
+
+
+  return 0;
 }
