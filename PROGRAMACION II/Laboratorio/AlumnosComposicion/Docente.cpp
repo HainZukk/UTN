@@ -17,30 +17,30 @@ std::string Docente::toCSV(){
 int Docente::getLegajo(){
   return _legajoDocente;
 }
-std::string Docente::getApellido(){
-  return _apellido;
-}
-std::string Docente::getNombre(){
-  return _nombre;
-}
+// std::string Docente::getApellido(){
+//   return _apellido;
+// }
+// std::string Docente::getNombre(){
+//   return _nombre;
+// }
 std::string Docente::getCuil(){
   return _cuil;
 }
  
-Domicilio Docente::getDomicilio(){
-  return _domicilio;
-}
+// Domicilio Docente::getDomicilio(){
+//   return _domicilio;
+// }
  
-std::string Docente::getTelefono(){
-  return _telefono;
-}
-std::string Docente::getEmail(){
-  return _email;
-}
+// std::string Docente::getTelefono(){
+//   return _telefono;
+// }
+// std::string Docente::getEmail(){
+//   return _email;
+// }
  
-Fecha Docente::getFechaNacimiento(){
-  return _nacimiento;
-}
+// Fecha Docente::getFechaNacimiento(){
+//   return _nacimiento;
+// }
  
 Fecha Docente::getFechaContratacion(){
   return _contratacion;
@@ -51,36 +51,36 @@ Fecha Docente::getFechaContratacion(){
 void Docente::setLegajo(int legajo){
   _legajoDocente = legajo;
 }
-void Docente::setApellido(std::string apellido){
-  _apellido = apellido;
-}
-void Docente::setNombre(std::string nombre){
-  _nombre = nombre;
-}
+// void Docente::setApellido(std::string apellido){
+//   _apellido = apellido;
+// }
+// void Docente::setNombre(std::string nombre){
+//   _nombre = nombre;
+// }
 void Docente::setCuil(std::string cuil){
   _cuil = cuil;
 }
  
-void Docente::setDomicilio(Domicilio domicilio){
-    _domicilio = domicilio;
-}
+// void Docente::setDomicilio(Domicilio domicilio){
+//     _domicilio = domicilio;
+// }
  
-void Docente::setTelefono(std::string telefono){
-  _telefono = telefono;
-}
-void Docente::setEmail(std::string email){
-  _email = email;
-}
+// void Docente::setTelefono(std::string telefono){
+//   _telefono = telefono;
+// }
+// void Docente::setEmail(std::string email){
+//   _email = email;
+// }
 
-void Docente::setFechaNacimiento(int dia,int mes,int anio){
-    _nacimiento.setDia(dia);
-    _nacimiento.setMes(mes);
-    _nacimiento.setAnio(anio);
-}
+// void Docente::setFechaNacimiento(int dia,int mes,int anio){
+//     _nacimiento.setDia(dia);
+//     _nacimiento.setMes(mes);
+//     _nacimiento.setAnio(anio);
+// }
 
-void Docente::setFechaNacimiento(Fecha nacimiento){
-    _nacimiento = nacimiento;
-}
+// void Docente::setFechaNacimiento(Fecha nacimiento){
+//     _nacimiento = nacimiento;
+// }
 
 void Docente::setFechaContratacion(int dia, int mes, int anio){
   _contratacion.setDia(dia);
