@@ -9,6 +9,7 @@ class Rectangulo : public Figuras{
     public:
         //Constructor
         Rectangulo();
+        Rectangulo(std::string color, float base, float altura);
         //Setters
         void setBase(float base);
         void setAltura(float altura);

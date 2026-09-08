@@ -6,8 +6,9 @@ class Cuadrado : public Figuras{
     private:
         float _lado;
     public:
-        //Constructor
+        //Constructores
         Cuadrado();
+        Cuadrado(std::string color, float lado);
         //Setters
         void setLado(float lado);
         //Getters

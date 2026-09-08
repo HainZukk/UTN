@@ -8,6 +8,10 @@ Cuadrado::Cuadrado(){
     _lado = 0;
 }
 
+Cuadrado::Cuadrado(std::string color, float lado){
+    _color = color;
+    _lado = lado;
+}
 
 //Setters
 void Cuadrado::setLado(float lado){

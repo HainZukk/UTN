@@ -3,12 +3,17 @@ using namespace std;
 #include <string>
 #include "rectangulo.h"
 
-//Constructor
+//Constructores
 Rectangulo::Rectangulo(){
     _base = 0;
     _altura = 0;
 }
 
+Rectangulo::Rectangulo(std::string color, float base, float altura){
+    _color = color;
+    _base = base;
+    _altura = altura;
+}
 
 //Setters
 void Rectangulo::setBase(float base){
