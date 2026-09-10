@@ -3,6 +3,7 @@
 #include "martillo.h"
 #include "destornillador.h"
 #include "taladro.h"
+#include "taladroPercutor.h"
 using namespace std;
 
 int main(){
@@ -10,6 +11,7 @@ int main(){
     martillo m1(5,19.7,"Plana");
     destornillador d1(20,17,"Estrella");
     taladro t1(2.5,30.0,750.0);
+    taladroPercutor tp1(3.2,35,850,3000); // Actividad 2 - 
     
 
     cout << "-----Prueba de Clase Madre-----" << endl;
@@ -27,8 +29,13 @@ int main(){
 
     cout << endl;
 
-    std::cout << "\n-----Prueba de Clase Hija Taladro-----\n";
+    cout << "\n-----Prueba de Clase Hija Taladro-----\n";
     t1.mostrarInformacion();
+
+    cout << endl;
+
+    cout << "\n-----Prueba de Clase Nieta Taladro Percutor-----\n";
+    tp1.mostrarInformacion();
     
 
     return 0;
