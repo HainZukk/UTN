@@ -1,0 +1,23 @@
+# Ejecutables compilados
+main
+*.out
+*.exe
+
+# Archivos objeto (si compilás con -c)
+*.o
+*.obj
+
+# Carpetas de compilacion
+build/
+bin/
+
+# Archivos de macOS
+.DS_Store
+
+# Makefile
+Makefile
+
+# Archivos de editores/IDE
+.vscode/
+.idea/
+*.swp
