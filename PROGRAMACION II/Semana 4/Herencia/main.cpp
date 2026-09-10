@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(){
-    herramientas h1(20,21.5);
+    herramientas h1(20,21.5,5000); //-----> 5000 Precio de Compra
     martillo m1(5,19.7,"Plana");
     destornillador d1(20,17,"Estrella");
     taladro t1(2.5,30.0,750.0);
