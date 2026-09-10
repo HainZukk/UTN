@@ -29,12 +29,12 @@ int main(){
 
     cout << endl;
 
-    cout << "\n-----Prueba de Clase Hija Taladro-----\n";
+    cout << "-----Prueba de Clase Hija Taladro-----\n";
     t1.mostrarInformacion();
 
     cout << endl;
 
-    cout << "\n-----Prueba de Clase Nieta Taladro Percutor-----\n";
+    cout << "-----Prueba de Clase Nieta Taladro Percutor-----\n";
     tp1.mostrarInformacion();
     
 
