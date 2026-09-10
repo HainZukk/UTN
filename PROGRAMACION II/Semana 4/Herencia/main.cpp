@@ -11,7 +11,7 @@ int main(){
     martillo m1(5,19.7,"Plana");
     destornillador d1(20,17,"Estrella");
     taladro t1(2.5,30.0,750.0);
-    taladroPercutor tp1(3.2,35,850,3000); // Actividad 2 - 
+    taladroPercutor tp1(3.2,35,850,3000); // Actividad 2  
     
 
     cout << "-----Prueba de Clase Madre-----" << endl;

@@ -4,18 +4,11 @@
 
 class herramientas{
     protected:
-        // nombre (string), peso (float, en kg), longitud (float, en cm)
         std::string _nombre;
         float _peso;
         float _longitud;
         float _precioDeCompra; // Actividad 3
     public:
-    /*
-    Métodos:
-    Constructor que inicialice los atributos de peso y longitud. El nombre queda vacío.
-    Métodos getters y setters para los atributos de peso y longitud.
-    mostrarInformacion() → Imprime el nombre de la herramienta, el peso y la longitud.
-    */  
     //Constructor
     herramientas(float peso , float longitud,float precioDeCompra = 0); //Precio de Compra Actividad 3
 
